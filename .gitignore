@@ -1,0 +1,21 @@
+# Python cache dosyaları
+__pycache__/
+*.pyc
+
+# Sanal ortam (virtual env)
+.venv/
+venv/
+env/
+
+# Ortam değişkenleri (gizli bilgiler)
+.env
+bubir.env
+
+# Firebase gizli anahtar dosyası
+firebase_config.json
+
+# SQLite veya geçici veritabanları
+*.db
+
+# VS Code dosyaları
+.vscode/
