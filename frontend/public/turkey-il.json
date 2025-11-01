@@ -1,0 +1,36 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "İstanbul" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [28.3, 41.5], [29.6, 41.5], [29.6, 40.7], [28.3, 40.7], [28.3, 41.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Ankara" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [31.0, 40.3], [33.5, 40.3], [33.5, 38.8], [31.0, 38.8], [31.0, 40.3]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "İzmir" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [26.0, 39.5], [27.7, 39.5], [27.7, 37.7], [26.0, 37.7], [26.0, 39.5]
+        ]]
+      }
+    }
+  ]
+}
+
