@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Leaflet il sınırları için yumuşak geçiş efekti */
+.leaflet-province {
+  transition: fill 200ms ease, stroke 200ms ease, fill-opacity 200ms ease, stroke-width 200ms ease;
+  cursor: pointer;
+}
