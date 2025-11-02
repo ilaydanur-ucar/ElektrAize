@@ -201,20 +201,22 @@ class SupabaseManager:
     
     def _initialize(self):
         """Bağlantıyı başlat"""
-        script_dir = Path(__file__).resolve().parent
-        env_path = script_dir / ".env"
-        
-        if not load_dotenv(env_path):
-            logger.warning(f"'.env' bulunamadı: {env_path}")
-        
+        from dotenv import load_dotenv
+        from pathlib import Path
+        import os
+
+        env_path = Path(__file__).resolve().parent / ".env"
+        load_dotenv(dotenv_path=env_path)
+
         url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_ANON_KEY")
-        
+        key = os.getenv("SUPABASE_KEY") or os.getenv("SUPABASE_ANON_KEY")
+
         if not url or not key:
-            raise EnvironmentError("SUPABASE_URL veya SUPABASE_ANON_KEY eksik.")
-        
+            raise EnvironmentError("SUPABASE_URL veya SUPABASE_KEY eksik.")
+
         self.client = create_client(url, key)
-        logger.info("Supabase bağlantısı başarılı")
+        logger.info("Supabase bağlantısı başarılı.")
+
     
     def fetch_table(self, table_name: str) -> pd.DataFrame:
         """Tek bir tablo çek"""
@@ -321,3 +323,27 @@ if __name__ == "__main__":
         
     except Exception as e:
         print(f"✗ Hata: {e}")
+        # ===================== MODEL SONUÇLARINI DB'YE YAZ =====================
+def save_model_result(model_name: str, target: str, train_score: float, test_score: float):
+    """
+    Model sonuçlarını Supabase'e kaydeder.
+    """
+    from datetime import datetime
+    sb = SupabaseManager()
+
+    data = {
+        "model_name": model_name,
+        "target_column": target,
+        "train_r2": round(train_score, 3),
+        "test_r2": round(test_score, 3),
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+    try:
+        res = sb.client.table("model_results").insert(data).execute()
+        if hasattr(res, "data") and res.data:
+            logger.info(f"[DB] Model sonucu kaydedildi: {model_name} ({target})")
+        else:
+            logger.warning(f"[DB] Model sonucu eklenemedi: {res}")
+    except Exception as e:
+        logger.error(f"[DB] Kayıt hatası: {e}")

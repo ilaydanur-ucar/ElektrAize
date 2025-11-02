@@ -10,9 +10,15 @@ from fastapi import FastAPI, Query, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sklearn.ensemble import RandomForestRegressor
+from redis_manager import set_cache, get_cache
+import asyncio
 import warnings
 warnings.filterwarnings('ignore')
-
+#--sena---
+from veri_cek import save_model_result
+from supabase_init import supabase
+from datetime import datetime
+#----sena--
 from firebase_auth import get_current_user
 from typing import Dict
 
@@ -73,7 +79,6 @@ def load_all_models():
             
             # Veri kontrolü
             Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
-            
             print(f"[MODEL] Veri boyutları - Xtr: {Xtr.shape}, Xte: {Xte.shape}")
             
             if len(Xtr) == 0 or len(Xte) == 0:
@@ -103,6 +108,17 @@ def load_all_models():
             
             print(f"[OK] {category_name} modeli yüklendi - Train R²: {train_score:.3f}, Test R²: {test_score:.3f}")
             
+            # 🔹 Model sonucunu Supabase'e kaydet
+            try:
+                save_model_result(
+                    model_name=category_name,
+                    target=target_col,
+                    train_score=train_score,
+                    test_score=test_score
+                )
+            except Exception as e:
+                print(f"[WARN] {category_name} sonucu DB'ye kaydedilemedi: {e}")
+        
         except Exception as e:
             print(f"[ERROR] {category_name} modeli yüklenemedi: {str(e)}")
             MODELS[category_name] = None
@@ -283,7 +299,20 @@ def anomalies(
 
         # Model tahminleri
         yhat = model.predict(Xte)
+
+        # Supabase'e kaydetmeden önce tek bir değer al
+        y_val = float(np.array(yhat).ravel()[0])
+
+        data = {
+       "prediction": y_val,
+       "created_at": datetime.now().isoformat(),
+        "city": city if city else "Unknown"
+       }
+
+        supabase.table("model_results").insert(data).execute()
+
         
+        #---------------------------SENA--------------------------------
         # Verileri hazırla - index uyumluluğu için
         df_test_reset = df_test.reset_index(drop=True)
         min_len = min(len(df_test_reset), len(yte), len(yhat))
@@ -524,4 +553,15 @@ def debug_all_cities():
         }
     except Exception as e:
         return {"error": str(e)}
+#------SENA------
+@app.get("/cache-test")
+async def cache_test():
+    key = "test_key"
+    value = "ElektrAize FastAPI test başarılı! 🚀"
 
+    # Önce yaz
+    await set_cache(key, value)
+
+    # Sonra oku
+    result = await get_cache(key)
+    return {"key": key, "value": result}
