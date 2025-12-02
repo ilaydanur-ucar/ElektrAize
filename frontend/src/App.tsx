@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import LeafletTurkeyMap from './components/LeafletTurkeyMap'
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ResponsiveContainer } from 'recharts'
+import { getAnomalies, type Anomaly } from './services/api'
 
 function App() {
   const [dark, setDark] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState<string>('genel')
+  const [selectedCity, setSelectedCity] = useState<string | null>(null)
+  const [anomalyData, setAnomalyData] = useState<Anomaly[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('elektraize-theme')
@@ -22,40 +27,99 @@ function App() {
     }
   }, [dark])
 
-  // Rastgele grafik verileri
-  const barData = useMemo(() => [
-    { name: 'Ocak', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-    { name: 'Şubat', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-    { name: 'Mart', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-    { name: 'Nisan', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-    { name: 'Mayıs', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-    { name: 'Haziran', tüketim: Math.floor(Math.random() * 5000) + 2000 },
-  ], [])
+  // Şehir seçildiğinde API'den veri çek
+  useEffect(() => {
+    if (selectedCity && selectedCategory) {
+      setLoading(true)
+      getAnomalies(selectedCity, selectedCategory)
+        .then((data) => {
+          setAnomalyData(data)
+          setLoading(false)
+        })
+        .catch((err) => {
+          console.error('API hatası:', err)
+          setAnomalyData([])
+          setLoading(false)
+        })
+    } else {
+      setAnomalyData([])
+    }
+  }, [selectedCity, selectedCategory])
 
-  const lineData = useMemo(() => [
-    { ay: 'Ocak', üretim: Math.floor(Math.random() * 4000) + 3000 },
-    { ay: 'Şubat', üretim: Math.floor(Math.random() * 4000) + 3000 },
-    { ay: 'Mart', üretim: Math.floor(Math.random() * 4000) + 3000 },
-    { ay: 'Nisan', üretim: Math.floor(Math.random() * 4000) + 3000 },
-    { ay: 'Mayıs', üretim: Math.floor(Math.random() * 4000) + 3000 },
-    { ay: 'Haziran', üretim: Math.floor(Math.random() * 4000) + 3000 },
-  ], [])
+  // Kategori isimlerini backend formatına çevir
+  const categoryMap: Record<string, string> = {
+    mesken: 'mesken',
+    aydınlanma: 'aydinlatma',
+    tarım: 'tarimsal',
+    ticaret: 'ticarethane',
+    genel: 'genel',
+    sanayi: 'sanayi',
+    diğer: 'diger',
+  }
 
-  const pieData = useMemo(() => [
-    { name: 'Sanayi', value: Math.floor(Math.random() * 300) + 100 },
-    { name: 'Konut', value: Math.floor(Math.random() * 300) + 100 },
-    { name: 'Ticaret', value: Math.floor(Math.random() * 300) + 100 },
-    { name: 'Tarım', value: Math.floor(Math.random() * 300) + 100 },
-  ], [])
+  // API'den gelen verileri grafik formatına çevir
+  const barData = useMemo(() => {
+    if (anomalyData.length === 0) return []
+    
+    // Aylara göre grupla ve gerçek tüketim değerlerini topla
+    const monthlyData: Record<string, number> = {}
+    anomalyData.forEach((item) => {
+      const month = new Date(item.donem).toLocaleDateString('tr-TR', { month: 'long' })
+      monthlyData[month] = (monthlyData[month] || 0) + item.gercek
+    })
+    
+    return Object.entries(monthlyData)
+      .map(([name, tüketim]) => ({ name, tüketim: Math.round(tüketim) }))
+      .sort((a, b) => {
+        const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
+        return months.indexOf(a.name.toLowerCase()) - months.indexOf(b.name.toLowerCase())
+      })
+  }, [anomalyData])
 
-  const areaData = useMemo(() => [
-    { zaman: '00:00', güç: Math.floor(Math.random() * 200) + 50 },
-    { zaman: '04:00', güç: Math.floor(Math.random() * 200) + 50 },
-    { zaman: '08:00', güç: Math.floor(Math.random() * 200) + 50 },
-    { zaman: '12:00', güç: Math.floor(Math.random() * 200) + 50 },
-    { zaman: '16:00', güç: Math.floor(Math.random() * 200) + 50 },
-    { zaman: '20:00', güç: Math.floor(Math.random() * 200) + 50 },
-  ], [])
+  const lineData = useMemo(() => {
+    if (anomalyData.length === 0) return []
+    
+    // Aylara göre grupla ve tahmin değerlerini topla
+    const monthlyData: Record<string, number> = {}
+    anomalyData.forEach((item) => {
+      const month = new Date(item.donem).toLocaleDateString('tr-TR', { month: 'long' })
+      monthlyData[month] = (monthlyData[month] || 0) + item.tahmin
+    })
+    
+    return Object.entries(monthlyData)
+      .map(([ay, üretim]) => ({ ay, üretim: Math.round(üretim) }))
+      .sort((a, b) => {
+        const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
+        return months.indexOf(a.ay.toLowerCase()) - months.indexOf(b.ay.toLowerCase())
+      })
+  }, [anomalyData])
+
+  const pieData = useMemo(() => {
+    if (anomalyData.length === 0) return []
+    
+    // Anomali ve normal verileri say
+    const anomalyCount = anomalyData.filter((item) => item.anomali).length
+    const normalCount = anomalyData.length - anomalyCount
+    
+    return [
+      { name: 'Anomali', value: anomalyCount },
+      { name: 'Normal', value: normalCount },
+    ]
+  }, [anomalyData])
+
+  const areaData = useMemo(() => {
+    if (anomalyData.length === 0) return []
+    
+    // Tarihe göre sırala ve gerçek değerleri al
+    const sorted = [...anomalyData].sort((a, b) => 
+      new Date(a.donem).getTime() - new Date(b.donem).getTime()
+    )
+    
+    return sorted.slice(0, 12).map((item) => ({
+      zaman: new Date(item.donem).toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' }),
+      güç: Math.round(item.gercek),
+    }))
+  }, [anomalyData])
 
   const COLORS = ['#00FFFF', '#3065AC', '#2563EB', '#3b82f6', '#60a5fa']
 
@@ -93,11 +157,24 @@ function App() {
       {/* Sol sabit menü - Fixed pozisyon için flex dışında */}
       <div className="fixed left-6 top-24 z-50">
         <div className="flex flex-col gap-0 rounded-2xl border border-white/15 bg-[#2E3B49]/95 px-6 py-16 shadow-lg text-white w-72">
-          {['mezken', 'aydınlanma', 'tarım', 'ticaret', 'genel', 'sanayi', 'diğer'].map((label) => (
-            <div key={label} className="select-none px-5 py-5 text-base font-semibold text-white/95 hover:bg-[#3065AC] cursor-pointer capitalize border-b border-white/10 last:border-b-0">
-              • {label}
-            </div>
-          ))}
+          {['mesken', 'aydınlanma', 'tarım', 'ticaret', 'genel', 'sanayi', 'diğer'].map((label) => {
+            const backendCategory = categoryMap[label]
+            const isSelected = selectedCategory === backendCategory
+            return (
+              <div
+                key={label}
+                onClick={() => {
+                  setSelectedCategory(backendCategory)
+                  setSelectedCity(null) // Kategori değişince şehir seçimini sıfırla
+                }}
+                className={`select-none px-5 py-5 text-base font-semibold text-white/95 hover:bg-[#3065AC] cursor-pointer capitalize border-b border-white/10 last:border-b-0 transition ${
+                  isSelected ? 'bg-[#3065AC] border-l-4 border-[#00FFFF]' : ''
+                }`}
+              >
+                • {label}
+              </div>
+            )
+          })}
         </div>
       </div>
 
@@ -109,7 +186,24 @@ function App() {
             <div className="flex items-start gap-4">
               {/* Leaflet Map */}
               <div>
-                <LeafletTurkeyMap dark={dark} />
+                <LeafletTurkeyMap
+                  dark={dark}
+                  category={selectedCategory}
+                  onCitySelect={(cityName) => {
+                    setSelectedCity(cityName)
+                  }}
+                />
+                {selectedCity && (
+                  <div className="mt-4 p-4 bg-[#2E3B49]/90 rounded-xl border border-white/10">
+                    <p className="text-sm text-gray-300">
+                      <span className="font-semibold text-[#00FFFF]">Seçili Şehir:</span> {selectedCity}
+                    </p>
+                    <p className="text-sm text-gray-300 mt-1">
+                      <span className="font-semibold text-[#00FFFF]">Kategori:</span> {selectedCategory}
+                    </p>
+                    {loading && <p className="text-sm text-yellow-400 mt-2">Veriler yükleniyor...</p>}
+                  </div>
+                )}
               </div>
             </div>
           </div>

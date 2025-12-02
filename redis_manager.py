@@ -1,4 +1,5 @@
 import redis.asyncio as redis
+import asyncio
 
 # Redis istemcisi oluşturuluyor
 redis_client = redis.Redis(
@@ -45,3 +46,7 @@ async def get_cache(key: str):
     except Exception as e:
         print(f"[CACHE-ERROR] Veri okunamadı: {e}")
         return None
+    import asyncio
+
+if __name__ == "__main__":
+    asyncio.run(test_connection())

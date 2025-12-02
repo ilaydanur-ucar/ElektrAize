@@ -212,7 +212,7 @@ def anomalies(
     end: Optional[str] = Query(None, description="YYYY-MM-DD"),
     tolerance_pct: float = Query(0.10, description="Tolerans yüzdesi"),
     debug: bool = Query(False, description="Debug bilgilerini göster"),
-    current_user: Dict = Depends(get_current_user)  # Bu satırı ekliyoruz
+    # current_user: Dict = Depends(get_current_user)  # Geçici olarak devre dışı - development için
 ):
     """
     GELİŞTİRİLMİŞ ANOMALİ TESPİTİ
@@ -225,27 +225,12 @@ def anomalies(
         # Kategori adını temizle (baştaki/sondaki boşlukları kaldır)
         category = category.strip().lower()
         
+        # Şehir adını normalize et (büyük harfe çevir)
+        if city:
+            city = city.strip().upper()
+        
         print(f"\n[ANOMALI] Yeni istek - Kategori: '{category}', Şehir: {city}")
         
-         # Model kontrolü - TEMİZLENMİŞ category İLE KONTROL ET
-        if category not in MODELS or MODELS[category] is None:
-            available_cats = [cat for cat, model in MODELS.items() if model is not None]
-            raise HTTPException(
-                status_code=400, 
-                detail=f"'{category}' kategorisi için model yüklenmemiş. Mevcut kategoriler: {available_cats}"
-            )
-        
-        # ... KODUN GERİ KALANI AYNEN KALACAK ...
-        model_info = MODELS[category]
-        target_col = model_info['target_col']
-        model = model_info['model']
-        
-        print(f"[MODEL] {category} modeli kullanılıyor - Target: {target_col}")
-
-        # Verileri yükle
-        df_train, df_test = get_processed_frames(target_col=target_col)
-        # ... mevcut kodun geri kalanı AYNEN kalacak ...
-
         # Model kontrolü - geliştirilmiş
         if category not in CONSUMPTION_CATEGORIES:
             available_cats = list(CONSUMPTION_CATEGORIES.keys())
@@ -256,9 +241,14 @@ def anomalies(
         
         if category not in MODELS or MODELS[category] is None:
             available_cats = [cat for cat, model in MODELS.items() if model is not None]
+            if len(available_cats) == 0:
+                raise HTTPException(
+                    status_code=503,
+                    detail="Hiçbir model yüklenmemiş. Backend başlatılırken modeller yüklenmeye çalışıldı ama başarısız oldu. Lütfen backend loglarını kontrol edin."
+                )
             raise HTTPException(
                 status_code=400, 
-                detail=f"'{category}' kategorisi için model yüklenmemiş. Mevcut kategoriler: {available_cats}"
+                detail=f"'{category}' kategorisi için model yüklenmemiş. Yüklenen kategoriler: {available_cats}. Tüm kategoriler: {list(CONSUMPTION_CATEGORIES.keys())}"
             )
         
         model_info = MODELS[category]
@@ -303,13 +293,16 @@ def anomalies(
         # Supabase'e kaydetmeden önce tek bir değer al
         y_val = float(np.array(yhat).ravel()[0])
 
-        data = {
-       "prediction": y_val,
-       "created_at": datetime.now().isoformat(),
-        "city": city if city else "Unknown"
-       }
-
-        supabase.table("model_results").insert(data).execute()
+        # Supabase'e kaydet (city kolonu tabloda yok, sadece prediction ve created_at kaydediyoruz)
+        try:
+            data = {
+                "prediction": y_val,
+                "created_at": datetime.now().isoformat(),
+            }
+            supabase.table("model_results").insert(data).execute()
+        except Exception as e:
+            print(f"[WARN] Supabase'e kayıt yapılamadı: {e}")
+            # Devam et, bu kritik değil
 
         
         #---------------------------SENA--------------------------------
@@ -349,10 +342,19 @@ def anomalies(
         filtered_count = original_count
         
         if city:
-            # Büyük harf tam eşleşme
-            city_mask = out["sehir"] == city
-            filtered_out = out[city_mask]
-            filtered_count = len(filtered_out)
+            # İstanbul için özel durum: ISTANBUL-ASYA ve ISTANBUL-AVRUPA'yı birleştir
+            if city == "ISTANBUL":
+                city_mask = out["sehir"].isin(["ISTANBUL-ASYA", "ISTANBUL-AVRUPA"])
+                filtered_out = out[city_mask].copy()
+                # Şehir adını ISTANBUL olarak normalize et (birleştirilmiş veri için)
+                filtered_out["sehir"] = "ISTANBUL"
+                filtered_count = len(filtered_out)
+                print(f"[FILTRE] İstanbul (ASYA+AVRUPA birleştirildi): {filtered_count} kayıt (önce: {original_count})")
+            else:
+                # Diğer şehirler için normal filtreleme
+                city_mask = out["sehir"] == city
+                filtered_out = out[city_mask]
+                filtered_count = len(filtered_out)
             
             print(f"[FILTRE] Şehir: '{city}' -> {filtered_count} kayıt (önce: {original_count})")
             

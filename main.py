@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
-
+from fastapi.middleware.cors import CORSMiddleware
 from firebase_auth import get_current_user
 from email_service import send_verification_email
 

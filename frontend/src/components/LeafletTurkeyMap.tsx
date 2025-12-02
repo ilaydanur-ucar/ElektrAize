@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import L from 'leaflet'
 import { useEffect, useState } from 'react'
+import { getAnomalies } from '../services/api'
 
 const containerStyle: React.CSSProperties = {
   width: '100%',
@@ -25,9 +26,17 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 })
 
-type Props = { dark?: boolean }
+type Props = {
+  dark?: boolean
+  category?: string
+  onCitySelect?: (cityName: string) => void
+}
 
-export default function LeafletTurkeyMap({ dark }: Props) {
+export default function LeafletTurkeyMap({
+  dark,
+  category = 'genel',
+  onCitySelect,
+}: Props) {
   const [ilGeoJson, setIlGeoJson] = useState<any | null>(null)
 
   useEffect(() => {
@@ -125,6 +134,43 @@ export default function LeafletTurkeyMap({ dark }: Props) {
                   // eski haline döndür
                   const el = target.getElement() as SVGElement
                   if (el) el.style.transform = 'scale(1)'
+                },
+                click: async (e) => {
+                  const feature = (e.target as any).feature
+                  let cityName =
+                    feature?.properties?.name ||
+                    feature?.properties?.NAME_1 ||
+                    feature?.properties?.il ||
+                    'UNKNOWN'
+
+                  // Türkçe karakterleri İngilizce karakterlere çevir
+                  const turkishToEnglish: Record<string, string> = {
+                    'ç': 'c', 'Ç': 'C',
+                    'ğ': 'g', 'Ğ': 'G',
+                    'ı': 'i', 'İ': 'I',
+                    'ö': 'o', 'Ö': 'O',
+                    'ş': 's', 'Ş': 'S',
+                    'ü': 'u', 'Ü': 'U',
+                  }
+                  
+                  cityName = cityName
+                    .split('')
+                    .map((char) => turkishToEnglish[char] || char)
+                    .join('')
+                    .toUpperCase()
+                    .trim()
+
+                  // İstanbul için özel kontrol (ISTANBUL-ASYA veya ISTANBUL-AVRUPA -> ISTANBUL)
+                  if (cityName.includes('ISTANBUL')) {
+                    cityName = 'ISTANBUL'
+                  }
+
+                  console.log('Tıklanan şehir:', cityName, 'Kategori:', category)
+
+                  // Callback ile parent component'e bildir
+                  if (onCitySelect) {
+                    onCitySelect(cityName)
+                  }
                 },
               })
               layer.once('add', () => {
