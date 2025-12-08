@@ -1,0 +1,1430 @@
+2025-12-08 01:37:54 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 01:37:54 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 01:37:54 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 01:37:54 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 01:37:54 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 01:37:54 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 01:37:54 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 01:37:55 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:37:55 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:37:56 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:37:56 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:37:56 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:56 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:56 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:37:56 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:37:56 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:37:56 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:37:56 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:37:57 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 01:37:57 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 01:37:57 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:37:57 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:37:57 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:37:57 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:37:58 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:58 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:58 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:37:58 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:37:58 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:37:58 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:37:58 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:37:58 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 01:37:59 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:59 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:37:59 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:37:59 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:37:59 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:00 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:00 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:00 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 01:38:00 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 01:38:00 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:38:00 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:38:01 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:38:01 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:38:01 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:01 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:01 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:38:01 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:01 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:01 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:01 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:02 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 01:38:02 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 01:38:02 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:38:02 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:38:02 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:38:02 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:38:02 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:03 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:03 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:38:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:03 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 01:38:03 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 01:38:03 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:38:04 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:38:04 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:38:04 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:38:04 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:05 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:05 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:38:05 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:05 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:06 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 01:38:06 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:06 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 01:38:06 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 01:38:07 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:07 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:07 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 01:38:07 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 01:38:07 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 01:38:07 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 01:38:07 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 01:50:07 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:50:07 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:50:07 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:50:07 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:50:07 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:53:40 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:53:40 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:53:40 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:53:40 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:53:40 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /me | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /me | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /me | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /me | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /me | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /protected-test | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /protected-test | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /protected-test | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /protected-test | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /protected-test | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies | Method: GET
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/scenarios | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/scenarios | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/scenarios | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/cache/invalidate | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/cache/invalidate | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/cache/invalidate | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/cache/invalidate | Method: POST
+2025-12-08 01:57:54 | WARNING  | error_handlers | http_exception_handler:59 | HTTPException: 401 - Authorization header missing or invalid | Path: /api/anomalies/cache/invalidate | Method: POST
+2025-12-08 02:23:51 | INFO     | rate_limiter | <module>:34 | Rate limiter Redis ile başlatıldı: redis://localhost:6379
+2025-12-08 02:23:51 | INFO     | rate_limiter | setup_rate_limiter:81 | Rate limiting middleware aktif ✅
+2025-12-08 02:23:51 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 02:23:51 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 02:23:51 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 02:23:51 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 02:23:51 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 02:23:51 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 02:23:51 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 02:23:52 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:23:53 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:23:53 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:23:53 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:23:53 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:53 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:54 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:23:54 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:54 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:54 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:54 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:54 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 02:23:55 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 02:23:55 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:23:55 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:23:55 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:23:55 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:23:55 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:56 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:56 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:23:56 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:56 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:56 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:56 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:56 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 02:23:56 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 02:23:56 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:23:57 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:23:57 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:23:57 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:23:57 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:57 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:57 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:23:57 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:57 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:58 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:58 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:58 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 02:23:58 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 02:23:58 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:23:58 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:23:59 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:23:59 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:23:59 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:59 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:23:59 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:23:59 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:59 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:23:59 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:23:59 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:00 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 02:24:00 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 02:24:00 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:24:00 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:24:00 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:24:00 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:24:01 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:01 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:01 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:24:01 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:01 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:01 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:01 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:02 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 02:24:02 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 02:24:02 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:24:02 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:24:02 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:24:02 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:24:02 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:03 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:03 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:24:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:03 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 02:24:03 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:04 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:24:04 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:24:04 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:05 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:24:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:24:05 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 02:24:05 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 02:24:05 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 02:24:05 | INFO     | __main__ | lifespan:37 | ElektrAize API kapatiliyor...
+2025-12-08 02:30:26 | INFO     | rate_limiter | <module>:34 | Rate limiter Redis ile başlatıldı: redis://localhost:6379
+2025-12-08 02:30:26 | INFO     | rate_limiter | setup_rate_limiter:81 | Rate limiting middleware aktif ✅
+2025-12-08 02:30:26 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 02:30:26 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 02:30:26 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 02:30:26 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 02:30:26 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 02:30:26 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 02:30:26 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 02:30:27 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:28 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:28 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:28 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:28 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:28 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:29 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:29 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:29 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:29 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:29 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:29 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 02:30:30 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 02:30:30 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:30 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:30 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:30 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:30 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:31 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:31 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:31 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:31 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:31 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:31 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:32 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 02:30:32 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 02:30:32 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:32 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:32 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:32 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:33 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:33 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:33 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:33 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:33 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:33 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:33 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:34 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 02:30:34 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 02:30:34 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:34 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:34 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:34 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:35 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:35 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:35 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:35 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:35 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:35 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:35 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:36 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 02:30:36 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 02:30:36 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:36 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:36 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:36 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:37 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:37 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:37 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:37 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:37 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:37 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:37 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:38 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 02:30:38 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 02:30:38 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:38 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:38 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:39 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:39 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:39 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:39 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:40 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 02:30:40 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 02:30:40 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:30:40 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:30:40 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:30:40 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:30:41 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:41 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:30:41 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:30:41 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:41 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:41 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:30:41 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:30:42 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 02:30:42 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 02:30:42 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 02:38:57 | INFO     | __main__ | lifespan:37 | ElektrAize API kapatiliyor...
+2025-12-08 02:39:29 | INFO     | rate_limiter | <module>:34 | Rate limiter Redis ile başlatıldı: redis://localhost:6379
+2025-12-08 02:39:29 | INFO     | rate_limiter | setup_rate_limiter:81 | Rate limiting middleware aktif ✅
+2025-12-08 02:39:29 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 02:39:29 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 02:39:29 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 02:39:29 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 02:39:29 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 02:39:29 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 02:39:29 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 02:39:30 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:30 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:30 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:30 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:30 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:31 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:31 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:31 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:31 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:31 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:31 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:31 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 02:39:31 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:32 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:32 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:32 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:32 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:33 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:33 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:33 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 02:39:33 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 02:39:33 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:33 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:34 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:34 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:34 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:34 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:34 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:34 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:34 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:34 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:34 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:35 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 02:39:35 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 02:39:35 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:35 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:35 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:35 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:36 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:36 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:36 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:36 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:36 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:36 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:36 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:36 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 02:39:37 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:37 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:37 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:38 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:38 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:38 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:38 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:38 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 02:39:39 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:39 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:39 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:40 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:40 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:40 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:40 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:40 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 02:39:40 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 02:39:40 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 02:39:40 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 02:39:41 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 02:39:41 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 02:39:41 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:41 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 02:39:41 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 02:39:41 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:41 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:42 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 02:39:42 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 02:39:42 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 02:39:42 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 02:39:42 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 03:06:16 | INFO     | __main__ | lifespan:37 | ElektrAize API kapatiliyor...
+2025-12-08 03:06:29 | INFO     | rate_limiter | <module>:36 | Rate limiter Redis ile başlatıldı: redis://localhost:6379
+2025-12-08 03:06:30 | INFO     | rate_limiter | setup_rate_limiter:88 | Rate limiting middleware aktif ✅
+2025-12-08 03:06:30 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 03:06:30 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 03:06:30 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 03:06:30 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 03:06:30 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 03:06:30 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 03:06:30 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 03:06:31 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:32 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:32 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:32 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:32 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:33 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:33 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:33 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:33 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:33 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:33 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:35 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 03:06:35 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 03:06:35 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:35 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:36 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:36 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:36 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:36 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:36 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:36 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:36 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:37 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:37 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:37 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 03:06:37 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 03:06:37 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:38 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:38 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:38 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:38 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:38 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:38 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:39 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 03:06:39 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 03:06:39 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:40 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:40 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:40 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:40 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:40 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:41 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:41 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:41 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:41 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:41 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:41 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 03:06:41 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 03:06:41 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:42 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:42 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:42 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:42 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:42 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:42 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:43 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:43 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:43 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:43 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:43 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 03:06:43 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 03:06:43 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:44 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:44 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:44 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:44 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:44 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:44 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:44 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:44 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:45 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:45 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:45 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 03:06:45 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 03:06:45 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:06:46 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:06:46 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:06:46 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:06:46 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:46 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:06:46 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:06:46 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:46 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:47 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:06:47 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:06:47 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 03:06:47 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 03:06:47 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 03:07:57 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:08 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:12 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:16 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:20 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:24 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:28 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:32 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:36 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:40 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:44 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:48 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:53 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:08:57 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:01 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:05 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:09 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:13 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:17 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:21 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:25 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:29 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:34 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:38 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:42 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:46 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:50 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:54 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:09:58 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:02 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:06 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:10 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:14 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:18 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:22 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:27 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:31 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:35 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:39 | ERROR    | error_handlers | generic_exception_handler:117 | Unexpected error: AttributeError - 'ConnectionError' object has no attribute 'detail' | Path: /health | Method: GET
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 150, in __call__
+    await _ASGIMiddlewareResponder(self.app)(scope, receive, send)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 195, in __call__
+    error_response, should_inject_headers = await async_check_limits(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\middleware.py", line 95, in async_check_limits
+    return exception_handler(request, exc), _bool
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\slowapi\extension.py", line 81, in _rate_limit_exceeded_handler
+    {"error": f"Rate limit exceeded: {exc.detail}"}, status_code=429
+                                      ^^^^^^^^^^
+AttributeError: 'ConnectionError' object has no attribute 'detail'
+2025-12-08 03:10:39 | ERROR    | asyncio | default_exception_handler:1833 | Exception in callback _ProactorReadPipeTransport._loop_reading(<_OverlappedF...ed result=151>)
+handle: <Handle _ProactorReadPipeTransport._loop_reading(<_OverlappedF...ed result=151>)>
+Traceback (most recent call last):
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 325, in _loop_reading
+    self._data_received(data, length)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 274, in _data_received
+    self._protocol.data_received(data)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 172, in data_received
+    self.handle_events()
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 181, in handle_events
+    self.send_400_response(msg)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 298, in send_400_response
+    output = self.conn.send(event)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\h11\_connection.py", line 538, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\h11\_connection.py", line 563, in send_with_data_passthrough
+    self._process_event(self.our_role, event)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\h11\_connection.py", line 284, in _process_event
+    self._cstate.process_event(role, type(event), server_switch_event)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\h11\_state.py", line 291, in process_event
+    self._fire_event_triggered_transitions(role, _event_type)
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Lib\site-packages\h11\_state.py", line 309, in _fire_event_triggered_transitions
+    raise LocalProtocolError(
+h11._util.LocalProtocolError: can't handle event type Response when role=SERVER and state=CLOSED
+2025-12-08 03:10:39 | ERROR    | asyncio | default_exception_handler:1833 | Exception in callback BaseProactorEventLoop._start_serving.<locals>.loop(<_OverlappedF...0.1', 57142))>) at C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py:843
+handle: <Handle BaseProactorEventLoop._start_serving.<locals>.loop(<_OverlappedF...0.1', 57142))>) at C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py:843>
+Traceback (most recent call last):
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 858, in loop
+    self._make_socket_transport(
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 647, in _make_socket_transport
+    return _ProactorSocketTransport(self, sock, protocol, waiter,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 613, in __init__
+    super().__init__(loop, sock, protocol, waiter, extra, server)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 189, in __init__
+    super().__init__(loop, sock, protocol, waiter, extra, server)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 335, in __init__
+    super().__init__(*args, **kw)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 66, in __init__
+    self._server._attach()
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 295, in _attach
+    assert self._sockets is not None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+2025-12-08 03:10:39 | ERROR    | asyncio | default_exception_handler:1833 | Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı
+2025-12-08 03:10:39 | ERROR    | asyncio | default_exception_handler:1833 | Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı
+2025-12-08 03:11:38 | WARNING  | rate_limiter | <module>:57 | Redis bağlantısı başarısız, in-memory kullanılacak: Timeout connecting to server
+2025-12-08 03:11:38 | INFO     | rate_limiter | setup_rate_limiter:104 | Rate limiting middleware aktif ✅
+2025-12-08 03:11:38 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-08 03:11:38 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-08 03:11:38 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-08 03:11:38 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-08 03:11:38 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-08 03:11:38 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-08 03:11:38 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-08 03:11:39 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:39 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:39 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:39 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:39 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:40 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:40 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:40 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:40 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:40 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:40 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:41 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-08 03:11:41 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-08 03:11:41 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:41 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:41 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:41 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:41 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:42 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:42 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:42 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:42 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:42 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:42 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:43 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-08 03:11:43 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-08 03:11:43 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:43 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:43 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:43 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:44 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:44 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:44 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:44 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:44 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:44 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:44 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:45 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-08 03:11:45 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-08 03:11:45 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:46 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:46 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:46 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:46 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:46 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:46 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:46 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:46 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:46 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:46 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:47 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-08 03:11:47 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-08 03:11:47 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:47 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:48 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:48 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:48 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:48 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:48 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:48 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:48 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:48 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:48 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:49 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-08 03:11:49 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-08 03:11:49 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:49 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:49 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:49 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:50 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:50 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:50 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:50 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:50 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:50 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:50 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:51 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-08 03:11:51 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-08 03:11:51 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-08 03:11:51 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-08 03:11:51 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-08 03:11:52 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-08 03:11:52 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:52 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-08 03:11:52 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-08 03:11:52 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:52 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:52 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-08 03:11:52 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-08 03:11:53 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-08 03:11:53 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-08 03:11:53 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute
+2025-12-08 03:12:02 | WARNING  | slowapi | __evaluate_limits:510 | ratelimit 50 per 1 minute (127.0.0.1) exceeded at endpoint: /health
+2025-12-08 03:12:02 | WARNING  | rate_limiter | rate_limit_handler:69 | Rate limit aşıldı: IP=127.0.0.1 | Path=/health | Limit=50 per 1 minute

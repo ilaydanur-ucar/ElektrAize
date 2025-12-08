@@ -1,4 +1,5 @@
-from firebase_init import db, auth
+from firebase_init import db
+from firebase_admin import auth
 
 # Firestore'a test verisi yaz
 db.collection("test").document("deneme1").set({"mesaj": "Merhaba Firebase!"})

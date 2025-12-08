@@ -31,9 +31,9 @@ TABLES = {
     "test": "test_2024_2025",
 }
 
-# Logging setup
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# Logging setup - logging_config.py'den merkezi logger kullan
+from logging_config import get_logger
+logger = get_logger(__name__)
 
 # ===================== OPTIMIZE YARDIMCILAR =====================
 def _to_datetime(df: pd.DataFrame) -> pd.DataFrame:
@@ -113,9 +113,184 @@ def impute_city_month(df: pd.DataFrame) -> pd.DataFrame:
     
     return df
 
+def add_weather_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Hava durumu verilerinden özellikler çıkar"""
+    if df.empty:
+        return df
+    
+    df = df.copy()
+    
+    # Hava durumu kolonlarını bul (genel pattern'ler) - Donem hariç
+    # Hava durumu kolonlarını bul - Donem (tarih) ve diğer tarih kolonlarını kesinlikle hariç tut
+    weather_cols = []
+    excluded_date_cols = {DATE_COL, 'Donem', 'Tarih', 'Date', 'date'}
+    
+    for col in df.columns:
+        # Tarih kolonlarını atla
+        if col in excluded_date_cols:
+            continue
+        # Tarih tipinde olan kolonları atla
+        if pd.api.types.is_datetime64_any_dtype(df[col]):
+            continue
+        # Sadece sayısal kolonlar
+        if not pd.api.types.is_numeric_dtype(df[col]):
+            continue
+        # Keyword kontrolü
+        col_lower = col.lower()
+        if any(keyword in col_lower for keyword in 
+               ['temp', 'sicaklik', 'temperature', 'humidity', 'yagis', 'rain', 
+                'ruzgar', 'wind', 'basinc', 'pressure', 'gunes', 'sun', 'bulut', 'cloud']):
+            weather_cols.append(col)
+    
+    if not weather_cols:
+        logger.debug("Hava durumu kolonları bulunamadı")
+        return df
+    
+    logger.info(f"{len(weather_cols)} hava durumu kolonu bulundu: {weather_cols[:5]}...")
+    
+    # Şehir bazında sıralama
+    if CITY_COL in df.columns and DATE_COL in df.columns:
+        df = df.sort_values([CITY_COL, DATE_COL]).reset_index(drop=True)
+        
+        for col in weather_cols:
+            # Tarih kolonunu kesinlikle atla
+            if col == DATE_COL or col == 'Donem':
+                continue
+            # Sadece sayısal kolonlar ve tarih tipinde olmayanlar
+            if pd.api.types.is_numeric_dtype(df[col]) and not pd.api.types.is_datetime64_any_dtype(df[col]):
+                # Lag features (geçmiş hava durumu)
+                for lag in [1, 2, 3]:
+                    df[f"{col}_lag{lag}"] = df.groupby(CITY_COL)[col].shift(lag)
+                
+                # Rolling mean (ortalama hava durumu)
+                df[f"{col}_roll3"] = df.groupby(CITY_COL)[col].rolling(3, min_periods=1).mean().reset_index(level=0, drop=True)
+                df[f"{col}_roll12"] = df.groupby(CITY_COL)[col].rolling(12, min_periods=1).mean().reset_index(level=0, drop=True)
+                
+                # Mevsimsel ortalamalar (ay bazında)
+                if "month" in df.columns:
+                    df[f"{col}_monthly_avg"] = df.groupby([CITY_COL, "month"])[col].transform("mean")
+    
+    return df
+
+def add_population_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Nüfus verilerinden özellikler çıkar"""
+    if df.empty:
+        return df
+    
+    df = df.copy()
+    
+    # Nüfus kolonlarını bul
+    pop_cols = [col for col in df.columns if any(keyword in col.lower() for keyword in 
+                ['nufus', 'population', 'pop', 'kisi', 'insan', 'sayi'])]
+    
+    if not pop_cols:
+        logger.debug("Nüfus kolonları bulunamadı")
+        return df
+    
+    logger.info(f"{len(pop_cols)} nüfus kolonu bulundu: {pop_cols[:5]}...")
+    
+    # Şehir bazında sıralama
+    if CITY_COL in df.columns and DATE_COL in df.columns:
+        df = df.sort_values([CITY_COL, DATE_COL]).reset_index(drop=True)
+        
+        for col in pop_cols:
+            if df[col].dtype in [np.number, 'float64', 'int64']:
+                # Nüfus değişim oranı (yıllık büyüme)
+                df[f"{col}_change"] = df.groupby(CITY_COL)[col].pct_change()
+                df[f"{col}_change_12"] = df.groupby(CITY_COL)[col].pct_change(12)  # Yıllık değişim
+                
+                # Nüfus trendi (rolling mean)
+                df[f"{col}_roll12"] = df.groupby(CITY_COL)[col].rolling(12, min_periods=1).mean().reset_index(level=0, drop=True)
+                
+                # Enerji tüketimi başına nüfus (eğer target varsa)
+                if TARGET in df.columns:
+                    df[f"energy_per_capita"] = df[TARGET] / (df[col] + 1e-8)  # Sıfıra bölme hatası önleme
+    
+    return df
+
+def add_interaction_features(df: pd.DataFrame) -> pd.DataFrame:
+    """Hava ve nüfus verileri arasındaki etkileşim özellikleri"""
+    if df.empty:
+        return df
+    
+    df = df.copy()
+    
+    # Tarih ve zaman kolonlarını hariç tut
+    excluded_cols = {DATE_COL, 'Donem', 'Tarih', 'Date', 'date', 'month', 'year', 'quarter', 'day_of_year'}
+    
+    # Hava durumu kolonları - sadece sayısal, tarih olmayan
+    weather_cols = []
+    for col in df.columns:
+        if col in excluded_cols:
+            continue
+        # Tarih tipinde olan kolonları kesinlikle atla
+        if pd.api.types.is_datetime64_any_dtype(df[col]):
+            continue
+        # Sadece sayısal kolonlar
+        if not pd.api.types.is_numeric_dtype(df[col]):
+            continue
+        # Keyword kontrolü - 'donem' içinde 'nem' geçiyor, bu yüzden özel kontrol
+        col_lower = col.lower()
+        if 'donem' in col_lower:
+            continue  # Donem kolonunu kesinlikle atla
+        if any(keyword in col_lower for keyword in ['temp', 'sicaklik', 'temperature', 'humidity']):
+            weather_cols.append(col)
+    
+    # Nüfus kolonları - sadece sayısal ve tarih olmayan
+    pop_cols = []
+    for col in df.columns:
+        if col in excluded_cols:
+            continue
+        if df[col].dtype not in [np.number, 'float64', 'int64', 'float32', 'int32']:
+            continue
+        if pd.api.types.is_datetime64_any_dtype(df[col]):
+            continue
+        if any(keyword in col.lower() for keyword in ['nufus', 'population', 'pop']):
+            pop_cols.append(col)
+    
+    # Etkileşim feature'ları
+    if weather_cols and pop_cols:
+        # Sıcaklık * Nüfus (soğutma/heating ihtiyacı)
+        temp_col = weather_cols[0] if weather_cols else None
+        pop_col = pop_cols[0] if pop_cols else None
+        
+        if temp_col and pop_col:
+            # Donem veya tarih kolonları kesinlikle atlanmalı
+            if temp_col in {DATE_COL, 'Donem'} or pop_col in {DATE_COL, 'Donem'}:
+                logger.warning(f"temp_pop_interaction eklenemedi: Tarih kolonu seçildi ({temp_col}, {pop_col})")
+            else:
+                try:
+                    # Kolonların sayısal olduğunu ve tarih tipinde olmadığını kontrol et
+                    if (pd.api.types.is_numeric_dtype(df[temp_col]) and 
+                        pd.api.types.is_numeric_dtype(df[pop_col]) and
+                        not pd.api.types.is_datetime64_any_dtype(df[temp_col]) and 
+                        not pd.api.types.is_datetime64_any_dtype(df[pop_col])):
+                        # Sayısal değerlere dönüştür ve çarp
+                        temp_vals = pd.to_numeric(df[temp_col], errors='coerce')
+                        pop_vals = pd.to_numeric(df[pop_col], errors='coerce')
+                        df["temp_pop_interaction"] = temp_vals * pop_vals
+                        logger.debug(f"temp_pop_interaction eklendi: {temp_col} * {pop_col}")
+                    else:
+                        logger.warning(f"temp_pop_interaction eklenemedi: Kolonlardan biri tarih tipinde veya sayısal değil ({temp_col}, {pop_col})")
+                except Exception as e:
+                    logger.warning(f"temp_pop_interaction eklenemedi: {e}", exc_info=True)
+    
+    # Mevsimsel etkileşimler
+    if "month" in df.columns and weather_cols:
+        temp_col = weather_cols[0] if weather_cols else None
+        if temp_col:
+            try:
+                # Mevsimsel sıcaklık etkisi
+                df["seasonal_temp"] = df.groupby("month")[temp_col].transform("mean")
+                logger.debug(f"seasonal_temp eklendi: {temp_col}")
+            except Exception as e:
+                logger.warning(f"seasonal_temp eklenemedi: {e}")
+    
+    return df
+
 def add_time_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Optimize zaman bazlı özellikler"""
-    if df.empty or TARGET not in df.columns:
+    """Optimize zaman bazlı özellikler + Hava/Nüfus feature'ları"""
+    if df.empty:
         return df
         
     df = _to_datetime(df.copy())
@@ -125,21 +300,34 @@ def add_time_features(df: pd.DataFrame) -> pd.DataFrame:
         df["year"] = df[DATE_COL].dt.year
         df["month"] = df[DATE_COL].dt.month
         df["quarter"] = df[DATE_COL].dt.quarter
+        df["day_of_year"] = df[DATE_COL].dt.dayofyear
+        df["is_summer"] = df["month"].isin([6, 7, 8]).astype(int)
+        df["is_winter"] = df["month"].isin([12, 1, 2]).astype(int)
 
     # Lag ve rolling features - sadece şehir bazında
     if CITY_COL in df.columns and DATE_COL in df.columns:
         df = df.sort_values([CITY_COL, DATE_COL]).reset_index(drop=True)
         
-        # Lag features
-        for lag in LAGS:
-            df[f"{TARGET}_lag{lag}"] = df.groupby(CITY_COL)[TARGET].shift(lag)
-        
-        # Rolling features - daha hızlı hesaplama
-        rolling_3 = df.groupby(CITY_COL)[TARGET].rolling(3, min_periods=1).mean()
-        rolling_12 = df.groupby(CITY_COL)[TARGET].rolling(12, min_periods=1).mean()
-        
-        df[f"{TARGET}_roll3"] = rolling_3.reset_index(level=0, drop=True)
-        df[f"{TARGET}_roll12"] = rolling_12.reset_index(level=0, drop=True)
+        # Target lag features (sadece target varsa)
+        if TARGET in df.columns:
+            for lag in LAGS:
+                df[f"{TARGET}_lag{lag}"] = df.groupby(CITY_COL)[TARGET].shift(lag)
+            
+            # Rolling features - daha hızlı hesaplama
+            rolling_3 = df.groupby(CITY_COL)[TARGET].rolling(3, min_periods=1).mean()
+            rolling_12 = df.groupby(CITY_COL)[TARGET].rolling(12, min_periods=1).mean()
+            
+            df[f"{TARGET}_roll3"] = rolling_3.reset_index(level=0, drop=True)
+            df[f"{TARGET}_roll12"] = rolling_12.reset_index(level=0, drop=True)
+    
+    # Hava durumu feature'ları ekle
+    df = add_weather_features(df)
+    
+    # Nüfus feature'ları ekle
+    df = add_population_features(df)
+    
+    # Etkileşim feature'ları ekle
+    df = add_interaction_features(df)
     
     return df
 
@@ -200,22 +388,18 @@ class SupabaseManager:
         return cls._instance
     
     def _initialize(self):
-        """Bağlantıyı başlat"""
-        from dotenv import load_dotenv
-        from pathlib import Path
-        import os
-
-        env_path = Path(__file__).resolve().parent / ".env"
-        load_dotenv(dotenv_path=env_path)
-
-        url = os.getenv("SUPABASE_URL")
-        key = os.getenv("SUPABASE_KEY") or os.getenv("SUPABASE_ANON_KEY")
-
-        if not url or not key:
-            raise EnvironmentError("SUPABASE_URL veya SUPABASE_KEY eksik.")
-
-        self.client = create_client(url, key)
-        logger.info("Supabase bağlantısı başarılı.")
+        """Bağlantıyı başlat - supabase_init.py'den import edilen client'ı kullan"""
+        # supabase_init.py'den zaten oluşturulmuş client'ı kullan
+        from supabase_init import supabase
+        
+        if supabase is None:
+            raise EnvironmentError(
+                "Supabase client oluşturulamadı. "
+                ".env dosyasında SUPABASE_URL ve SUPABASE_ANON_KEY kontrol edin."
+            )
+        
+        self.client = supabase
+        logger.info("Supabase bağlantısı başarılı (SupabaseManager).")
 
     
     def fetch_table(self, table_name: str) -> pd.DataFrame:
@@ -236,9 +420,9 @@ def fetch_tables() -> Dict[str, pd.DataFrame]:
         try:
             df = sb.fetch_table(table)
             dfs[nick] = df
-            logger.info(f"[OK] {table} -> {df.shape}")
+            logger.info(f"{table} tablosu yüklendi -> {df.shape}")
         except Exception as e:
-            logger.warning(f"[WARN] {table} çekilemedi: {e}")
+            logger.warning(f"{table} tablosu çekilemedi: {e}", exc_info=True)
             dfs[nick] = pd.DataFrame()
     
     return dfs
@@ -263,7 +447,7 @@ def build_train_test_frames(dfs: dict) -> Tuple[pd.DataFrame, pd.DataFrame]:
         if not right_df.empty:
             train = _smart_merge(train, right_df)
             test = _smart_merge(test, right_df)
-            logger.debug(f"{name} merge edildi")
+            logger.debug(f"{name} tablosu merge edildi")
 
     logger.info(f"Merge bitti -> Train: {train.shape}, Test: {test.shape}")
     return train, test
@@ -308,21 +492,21 @@ def get_processed_frames(target_col: str = TARGET):
 
 # ===================== TEST =====================
 if __name__ == "__main__":
-    print("Optimize veri pipeline testi...")
+    logger.info("Optimize veri pipeline testi başlatılıyor...")
     
     try:
         X_tr, X_te, y_tr, y_te = get_train_test()
-        print(f"✓ X_train: {X_tr.shape}, X_test: {X_te.shape}")
-        print(f"✓ Özellikler: {list(X_tr.columns)[:8]}...")
-        print(f"✓ Target örnek: {y_tr.head(3).tolist()}")
+        logger.info(f"✓ X_train: {X_tr.shape}, X_test: {X_te.shape}")
+        logger.debug(f"✓ Özellikler: {list(X_tr.columns)[:8]}...")
+        logger.debug(f"✓ Target örnek: {y_tr.head(3).tolist()}")
         
         # İşlenmiş frame'leri de test et
         df_tr, df_te = get_processed_frames()
-        print(f"✓ İşlenmiş Train: {df_tr.shape}, Test: {df_te.shape}")
-        print("✓ Tüm testler başarılı!")
+        logger.info(f"✓ İşlenmiş Train: {df_tr.shape}, Test: {df_te.shape}")
+        logger.info("✓ Tüm testler başarılı!")
         
     except Exception as e:
-        print(f"✗ Hata: {e}")
+        logger.error(f"✗ Test hatası: {e}", exc_info=True)
         # ===================== MODEL SONUÇLARINI DB'YE YAZ =====================
 def save_model_result(model_name: str, target: str, train_score: float, test_score: float):
     """
@@ -342,8 +526,8 @@ def save_model_result(model_name: str, target: str, train_score: float, test_sco
     try:
         res = sb.client.table("model_results").insert(data).execute()
         if hasattr(res, "data") and res.data:
-            logger.info(f"[DB] Model sonucu kaydedildi: {model_name} ({target})")
+            logger.debug(f"Model sonucu kaydedildi: {model_name} ({target})")
         else:
-            logger.warning(f"[DB] Model sonucu eklenemedi: {res}")
+            logger.warning(f"Model sonucu eklenemedi: {res}")
     except Exception as e:
-        logger.error(f"[DB] Kayıt hatası: {e}")
+        logger.error(f"Model sonucu kayıt hatası: {model_name} - {e}", exc_info=True)

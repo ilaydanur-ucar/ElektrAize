@@ -1,5 +1,6 @@
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Autocomplete } from '@react-google-maps/api'
 import { GOOGLE_MAPS_API_KEY } from '../config'
+import { useRef, useState } from 'react'
 
 const containerStyle: React.CSSProperties = {
   width: '100%',
@@ -11,10 +12,13 @@ const center = { lat: 39.0, lng: 35.0 }
 
 export default function GoogleTurkeyMap() {
   const apiKey = GOOGLE_MAPS_API_KEY as string | undefined
+  const [map, setMap] = useState<google.maps.Map | null>(null)
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey || '',
     id: 'elektraize-gmaps',
+    libraries: ['places'],
   })
 
   if (!apiKey) {
@@ -29,6 +33,25 @@ export default function GoogleTurkeyMap() {
     )
   }
   if (!isLoaded) return <div className="text-sm text-gray-600">Harita yükleniyor...</div>
+
+  const onPlaceChanged = () => {
+    if (autocompleteRef.current && map) {
+      const place = autocompleteRef.current.getPlace()
+      if (place.geometry?.location) {
+        const location = place.geometry.location
+        map.setCenter(location)
+        map.setZoom(10)
+      }
+    }
+  }
+
+  const onLoad = (autocomplete: google.maps.places.Autocomplete) => {
+    autocompleteRef.current = autocomplete
+  }
+
+  const onMapLoad = (mapInstance: google.maps.Map) => {
+    setMap(mapInstance)
+  }
 
   return (
     <div className="flex items-center gap-4">
@@ -48,10 +71,29 @@ export default function GoogleTurkeyMap() {
 
       {/* Harita sağda */}
       <div className="w-[900px] max-w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+        {/* Arama çubuğu */}
+        <div className="p-4 bg-[#2E3B49] border-b border-gray-200 dark:border-gray-700">
+          <Autocomplete
+            onLoad={onLoad}
+            onPlaceChanged={onPlaceChanged}
+            options={{
+              componentRestrictions: { country: 'tr' },
+              types: ['(cities)'],
+            }}
+          >
+            <input
+              type="text"
+              placeholder="Şehir ara..."
+              className="w-full px-4 py-2 rounded-lg border border-white/20 bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#00FFFF] focus:border-transparent"
+            />
+          </Autocomplete>
+        </div>
+        
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
           zoom={5}
+          onLoad={onMapLoad}
           options={{
             disableDefaultUI: true,
             gestureHandling: 'greedy',

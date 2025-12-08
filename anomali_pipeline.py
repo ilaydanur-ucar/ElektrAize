@@ -110,7 +110,7 @@ def train_city(df: pd.DataFrame, city: str) -> str:
 def predict_and_residuals(df: pd.DataFrame, city: str, model_path: str) -> pd.DataFrame:
     g = df[df[CITY_COL] == city].copy()
     model = joblib.load(model_path)
-    X = g[feature_cols(g)].fillna(method="ffill").fillna(method="bfill")  # güvenlik
+    X = g[feature_cols(g)].ffill().bfill()  # Updated: deprecated method parameter removed
     g["yhat"] = model.predict(X)
     g["residual"] = g[TARGET] - g["yhat"]
     return g

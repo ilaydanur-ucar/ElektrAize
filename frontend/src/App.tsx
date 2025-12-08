@@ -58,8 +58,19 @@ function App() {
   }
 
   // API'den gelen verileri grafik formatına çevir
+  // Backend bağlantısı yoksa örnek veriler göster
   const barData = useMemo(() => {
-    if (anomalyData.length === 0) return []
+    if (anomalyData.length === 0) {
+      // Örnek veriler - görsel amaçlı
+      return [
+        { name: 'Ocak', tüketim: 6200 },
+        { name: 'Şubat', tüketim: 3000 },
+        { name: 'Mart', tüketim: 2800 },
+        { name: 'Nisan', tüketim: 4800 },
+        { name: 'Mayıs', tüketim: 5200 },
+        { name: 'Haziran', tüketim: 6200 },
+      ]
+    }
     
     // Aylara göre grupla ve gerçek tüketim değerlerini topla
     const monthlyData: Record<string, number> = {}
@@ -76,26 +87,61 @@ function App() {
       })
   }, [anomalyData])
 
-  const lineData = useMemo(() => {
-    if (anomalyData.length === 0) return []
+  // Kümülatif Tüketim Eğrisi - Ay ay toplanarak artan eğri
+  const cumulativeData = useMemo(() => {
+    if (anomalyData.length === 0) {
+      // Örnek veriler - görsel amaçlı (kümülatif)
+      let total = 0
+      return [
+        { ay: 'Ocak', toplamTüketim: total += 6200 },
+        { ay: 'Şubat', toplamTüketim: total += 3000 },
+        { ay: 'Mart', toplamTüketim: total += 2800 },
+        { ay: 'Nisan', toplamTüketim: total += 4800 },
+        { ay: 'Mayıs', toplamTüketim: total += 5200 },
+        { ay: 'Haziran', toplamTüketim: total += 6200 },
+      ]
+    }
     
-    // Aylara göre grupla ve tahmin değerlerini topla
+    // Aylara göre grupla ve gerçek tüketim değerlerini topla
     const monthlyData: Record<string, number> = {}
     anomalyData.forEach((item) => {
       const month = new Date(item.donem).toLocaleDateString('tr-TR', { month: 'long' })
-      monthlyData[month] = (monthlyData[month] || 0) + item.tahmin
+      monthlyData[month] = (monthlyData[month] || 0) + item.gercek
     })
     
-    return Object.entries(monthlyData)
-      .map(([ay, üretim]) => ({ ay, üretim: Math.round(üretim) }))
+    // Ayları sırala
+    const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
+    const sortedMonths = Object.entries(monthlyData)
+      .map(([ay, tüketim]) => ({ ay, tüketim: Math.round(tüketim) }))
       .sort((a, b) => {
-        const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
         return months.indexOf(a.ay.toLowerCase()) - months.indexOf(b.ay.toLowerCase())
       })
+    
+    // Kümülatif toplam hesapla - her ay bir önceki ayın değerini ekleyerek artar
+    let cumulativeTotal = 0
+    return sortedMonths.map((item) => {
+      cumulativeTotal += item.tüketim
+      return {
+        ay: item.ay,
+        toplamTüketim: cumulativeTotal
+      }
+    })
   }, [anomalyData])
 
   const pieData = useMemo(() => {
-    if (anomalyData.length === 0) return []
+    if (anomalyData.length === 0) {
+      // Örnek veriler - görsel amaçlı (sektör dağılımı)
+      // Sol paneldeki kategorilere göre
+      return [
+        { name: 'Mesken', value: 24 },
+        { name: 'Aydınlanma', value: 15 },
+        { name: 'Tarım', value: 12 },
+        { name: 'Ticaret', value: 18 },
+        { name: 'Genel', value: 8 },
+        { name: 'Sanayi', value: 13 },
+        { name: 'Diğer', value: 10 },
+      ]
+    }
     
     // Anomali ve normal verileri say
     const anomalyCount = anomalyData.filter((item) => item.anomali).length
@@ -108,7 +154,23 @@ function App() {
   }, [anomalyData])
 
   const areaData = useMemo(() => {
-    if (anomalyData.length === 0) return []
+    if (anomalyData.length === 0) {
+      // Örnek veriler - görsel amaçlı (günlük güç dağılımı)
+      return [
+        { zaman: '1 Gün', güç: 260 },
+        { zaman: '2 Gün', güç: 240 },
+        { zaman: '3 Gün', güç: 220 },
+        { zaman: '4 Gün', güç: 200 },
+        { zaman: '5 Gün', güç: 195 },
+        { zaman: '6 Gün', güç: 190 },
+        { zaman: '7 Gün', güç: 185 },
+        { zaman: '8 Gün', güç: 180 },
+        { zaman: '9 Gün', güç: 175 },
+        { zaman: '10 Gün', güç: 170 },
+        { zaman: '11 Gün', güç: 165 },
+        { zaman: '12 Gün', güç: 160 },
+      ]
+    }
     
     // Tarihe göre sırala ve gerçek değerleri al
     const sorted = [...anomalyData].sort((a, b) => 
@@ -230,17 +292,17 @@ function App() {
                 </ResponsiveContainer>
               </div>
 
-              {/* Line Chart */}
+              {/* Kümülatif Tüketim Eğrisi */}
               <div className="bg-[#2E3B49]/90 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold mb-4">Aylık Üretim</h3>
+                <h3 className="text-lg font-semibold mb-4">Toplam Tüketim Eğrisi (Yıl İçerisinde Biriken)</h3>
                 <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={lineData}>
+                  <LineChart data={cumulativeData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
                     <XAxis dataKey="ay" stroke="#93c5fd" />
                     <YAxis stroke="#93c5fd" />
                     <Tooltip contentStyle={{ backgroundColor: '#1e3a8a', border: '1px solid #3065AC', borderRadius: '8px', color: '#fff' }} />
                     <Legend />
-                    <Line type="monotone" dataKey="üretim" stroke="#3065AC" strokeWidth={2} />
+                    <Line type="monotone" dataKey="toplamTüketim" stroke="#3065AC" strokeWidth={2} dot={{ fill: '#3065AC', r: 4 }} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>

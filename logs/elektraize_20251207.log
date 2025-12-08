@@ -1,0 +1,988 @@
+2025-12-07 22:44:50 | INFO     | __main__ | lifespan:30 | 🚀 ElektrAize API başlatılıyor...
+2025-12-07 22:44:50 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-07 22:44:50 | INFO     | __main__ | lifespan:32 | Tüm modeller yükleniyor...
+2025-12-07 22:44:50 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: SUPABASE_URL veya SUPABASE_KEY eksik.
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | genel modeli yüklenemedi: SUPABASE_URL veya SUPABASE_KEY eksik.
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 399, in get_processed_data
+    dfs = fetch_tables()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 354, in fetch_tables
+    sb = SupabaseManager()
+         ^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 321, in __new__
+    cls._instance._initialize()
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 337, in _initialize
+    raise EnvironmentError("SUPABASE_URL veya SUPABASE_KEY eksik.")
+OSError: SUPABASE_URL veya SUPABASE_KEY eksik.
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | aydinlatma modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | mesken modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | sanayi modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | tarimsal modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | ticarethane modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | genel_elektrik çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | weather çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | nufus çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | hizmet çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | train_2022_2023 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | fetch_table:349 | test_2024_2025 çekilemedi: 'SupabaseManager' object has no attribute 'client'
+2025-12-07 22:44:50 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (0, 0)
+2025-12-07 22:44:50 | ERROR    | veri_cek | build_train_test_frames:375 | Train veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | ERROR    | anomaly_router | load_all_models:213 | diger modeli yüklenemedi: Eğitim veya test verisi boş!
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 403, in get_processed_data
+    raise ValueError("Eğitim veya test verisi boş!")
+ValueError: Eğitim veya test verisi boş!
+2025-12-07 22:44:50 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 0/7 model yüklendi
+2025-12-07 22:44:50 | INFO     | __main__ | lifespan:35 | ✅ ElektrAize API hazır!
+2025-12-07 22:49:02 | INFO     | __main__ | lifespan:37 | 🛑 ElektrAize API kapatılıyor...
+2025-12-07 23:34:26 | INFO     | __main__ | lifespan:30 | 🚀 ElektrAize API başlatılıyor...
+2025-12-07 23:34:26 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-07 23:34:26 | INFO     | __main__ | lifespan:32 | Tüm modeller yükleniyor...
+2025-12-07 23:34:26 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-07 23:34:26 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-07 23:34:26 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-07 23:34:27 | INFO     | veri_cek | _initialize:340 | Supabase bağlantısı başarılı.
+2025-12-07 23:34:27 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:28 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:28 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:28 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:28 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:29 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:29 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:29 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:29 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:29 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:29 | ERROR    | anomaly_router | load_all_models:213 | genel modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:29 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-07 23:34:29 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:29 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:29 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:29 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:30 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:30 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:30 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:30 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:30 | ERROR    | anomaly_router | load_all_models:213 | aydinlatma modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:30 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:30 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:31 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:31 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:31 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:31 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:31 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:31 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:31 | ERROR    | anomaly_router | load_all_models:213 | mesken modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:31 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-07 23:34:31 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:31 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:31 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:32 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:32 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:32 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:32 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:32 | ERROR    | anomaly_router | load_all_models:213 | sanayi modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:32 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:32 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:33 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:33 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:33 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:33 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:33 | ERROR    | anomaly_router | load_all_models:213 | tarimsal modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:33 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:33 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:34 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:34 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:34 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:34 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:34 | ERROR    | anomaly_router | load_all_models:213 | ticarethane modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:34 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:34:34 | INFO     | veri_cek | fetch_tables:361 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:35 | INFO     | veri_cek | fetch_tables:361 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:34:35 | INFO     | veri_cek | build_train_test_frames:390 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:34:35 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:34:35 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:34:35 | ERROR    | veri_cek | get_processed_data:420 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:35 | ERROR    | anomaly_router | load_all_models:213 | diger modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 425, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 411, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:34:35 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 0/7 model yüklendi
+2025-12-07 23:34:35 | INFO     | __main__ | lifespan:35 | ✅ ElektrAize API hazır!
+2025-12-07 23:36:00 | INFO     | __main__ | lifespan:37 | 🛑 ElektrAize API kapatılıyor...
+2025-12-07 23:42:41 | INFO     | __main__ | lifespan:30 | 🚀 ElektrAize API başlatılıyor...
+2025-12-07 23:42:42 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-07 23:42:42 | INFO     | __main__ | lifespan:32 | Tüm modeller yükleniyor...
+2025-12-07 23:42:42 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-07 23:42:42 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-07 23:42:42 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-07 23:42:42 | INFO     | veri_cek | _initialize:336 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-07 23:42:44 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:44 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:44 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:44 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:45 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:45 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:45 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:45 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:45 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:45 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:45 | ERROR    | anomaly_router | load_all_models:213 | genel modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:45 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-07 23:42:45 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:45 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:46 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:46 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:46 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:46 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:46 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:46 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:46 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:46 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:46 | ERROR    | anomaly_router | load_all_models:213 | aydinlatma modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:46 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-07 23:42:46 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:47 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:47 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:47 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:47 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:47 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:47 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:48 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:48 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:48 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:48 | ERROR    | anomaly_router | load_all_models:213 | mesken modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:48 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-07 23:42:48 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:48 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:48 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:48 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:48 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:49 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:49 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:49 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:49 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:49 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:49 | ERROR    | anomaly_router | load_all_models:213 | sanayi modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:49 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-07 23:42:49 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:49 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:49 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:50 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:50 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:50 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:50 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:50 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:50 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:50 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:50 | ERROR    | anomaly_router | load_all_models:213 | tarimsal modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:50 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-07 23:42:50 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:50 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:51 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:51 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:51 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:51 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:51 | ERROR    | anomaly_router | load_all_models:213 | ticarethane modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:51 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:42:51 | INFO     | veri_cek | fetch_tables:357 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:42:52 | INFO     | veri_cek | fetch_tables:357 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:42:52 | INFO     | veri_cek | fetch_tables:357 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:42:52 | INFO     | veri_cek | fetch_tables:357 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:52 | INFO     | veri_cek | fetch_tables:357 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:42:52 | INFO     | veri_cek | build_train_test_frames:386 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:42:52 | INFO     | veri_cek | add_weather_features:132 | 3 hava durumu kolonu bulundu: ['Donem', 'windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:42:52 | INFO     | veri_cek | add_population_features:169 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:42:52 | ERROR    | veri_cek | get_processed_data:416 | Veri işleme hatası: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:52 | ERROR    | anomaly_router | load_all_models:213 | diger modeli yüklenemedi: cannot perform __mul__ with this index type: DatetimeArray
+Traceback (most recent call last):
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\anomaly_router.py", line 169, in load_all_models
+    Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 421, in get_train_test
+    return get_processed_data(target_col, return_frames=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 407, in get_processed_data
+    df_train = add_time_features(impute_city_month(df_train))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 264, in add_time_features
+    df = add_interaction_features(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\veri_cek.py", line 212, in add_interaction_features
+    df["temp_pop_interaction"] = df[temp_col] * df[pop_col]
+                                 ~~~~~~~~~~~~~^~~~~~~~~~~~~
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\arraylike.py", line 202, in __mul__
+    return self._arith_method(other, operator.mul)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\series.py", line 6135, in _arith_method
+    return base.IndexOpsMixin._arith_method(self, other, op)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\base.py", line 1382, in _arith_method
+    result = ops.arithmetic_op(lvalues, rvalues, op)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\array_ops.py", line 273, in arithmetic_op
+    res_values = op(left, right)
+                 ^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\common.py", line 76, in new_method
+    return method(self, other)
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ilayd\AppData\Local\Programs\Python\Python312\Lib\site-packages\pandas\core\ops\invalid.py", line 59, in invalid_op
+    raise TypeError(f"cannot perform {name} with this index type: {typ}")
+TypeError: cannot perform __mul__ with this index type: DatetimeArray
+2025-12-07 23:42:52 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 0/7 model yüklendi
+2025-12-07 23:42:52 | INFO     | __main__ | lifespan:35 | ✅ ElektrAize API hazır!
+2025-12-07 23:56:32 | INFO     | __main__ | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-07 23:56:32 | INFO     | __main__ | lifespan:31 | ============================================================
+2025-12-07 23:56:32 | INFO     | __main__ | lifespan:32 | Tum modeller yukleniyor...
+2025-12-07 23:56:32 | INFO     | __main__ | lifespan:33 | ============================================================
+2025-12-07 23:56:32 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-07 23:56:32 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-07 23:56:32 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-07 23:56:33 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:34 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:34 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:34 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:34 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:34 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:34 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:34 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:34 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:34 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:34 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:35 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-07 23:56:35 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-07 23:56:35 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:36 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:36 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:36 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:36 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:36 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:36 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:36 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:36 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:36 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:36 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:37 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-07 23:56:38 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-07 23:56:38 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:38 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:38 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:38 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:38 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:39 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:39 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:39 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:39 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:40 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-07 23:56:40 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-07 23:56:41 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:41 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:41 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:41 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:41 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:42 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:42 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:42 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:42 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:42 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:42 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:43 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-07 23:56:43 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-07 23:56:43 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:43 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:43 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:44 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:44 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:44 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:44 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:44 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:44 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:44 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:44 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:45 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-07 23:56:45 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-07 23:56:46 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:46 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:46 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:46 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:46 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:47 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:47 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:47 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:47 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:47 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:47 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:48 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-07 23:56:48 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-07 23:56:48 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-07 23:56:48 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-07 23:56:49 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-07 23:56:49 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-07 23:56:49 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:49 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-07 23:56:49 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-07 23:56:49 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:49 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:50 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-07 23:56:50 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-07 23:56:50 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-07 23:56:50 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-07 23:56:50 | INFO     | __main__ | lifespan:35 | ElektrAize API hazir!
+2025-12-08 00:09:13 | INFO     | __main__ | lifespan:37 | ElektrAize API kapatiliyor...
