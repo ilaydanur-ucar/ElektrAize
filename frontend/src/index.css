@@ -15,3 +15,58 @@ html, body, #root {
   transition: fill 200ms ease, stroke 200ms ease, fill-opacity 200ms ease, stroke-width 200ms ease;
   cursor: pointer;
 }
+/* Gündüz modunda harita arkaplanını mavi yap */
+.light-map {
+  background-color: #dbeafe !important;
+}
+
+.light-map .leaflet-container {
+  background-color: #dbeafe !important;
+}
+
+.light-map .leaflet-pane {
+  background-color: #dbeafe !important;
+}
+
+.light-map .leaflet-map-pane {
+  background-color: #dbeafe !important;
+}
+
+.light-map .leaflet-tile-pane {
+  background-color: #dbeafe !important;
+}
+
+/* Simplemaps trial yazısını gizle */
+#map a[href*="simplemaps.com"] {
+  display: none !important;
+}
+
+#map .simplemaps-trial {
+  display: none !important;
+}
+
+/* Simplemaps harita arka planını kaldır */
+#map svg {
+  background: transparent !important;
+}
+
+/* Harita container'ının görünür olduğundan emin ol */
+#map {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Zoom kontrollerini gizle - sadece zoom butonlarını hedefle */
+#map .simplemaps-zoom-in,
+#map .simplemaps-zoom-out,
+#map .simplemaps-zoom-controls,
+#map button.simplemaps-zoom-in,
+#map button.simplemaps-zoom-out,
+#map .simplemaps-controls {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+

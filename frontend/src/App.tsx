@@ -1,14 +1,26 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import LeafletTurkeyMap from './components/LeafletTurkeyMap'
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Cell, ResponsiveContainer } from 'recharts'
-import { getAnomalies, type Anomaly } from './services/api'
 
 function App() {
   const [dark, setDark] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState<string>('genel')
-  const [selectedCity, setSelectedCity] = useState<string | null>(null)
-  const [anomalyData, setAnomalyData] = useState<Anomaly[]>([])
-  const [loading, setLoading] = useState(false)
+  const [datePickerOpen, setDatePickerOpen] = useState(false)
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+  const [filterOpen, setFilterOpen] = useState(false)
+  const [selectedFilter, setSelectedFilter] = useState<string | null>(null)
+  const [selectedCity, setSelectedCity] = useState<string | null>(null)        
+  const chartsSectionRef = useRef<HTMLElement>(null)
+
+  const filterCategories = [
+    { label: 'aydınlanma', icon: '/light-bulb.png' },
+    { label: 'mesken', icon: '/house.png' },
+    { label: 'ticaret', icon: '/dollar.png' },
+    { label: 'sanayi', icon: '/factory.png' },
+    { label: 'tarım', icon: '/wheat.png' },
+    { label: 'genel', icon: '/all.png' },
+    { label: 'diğer', icon: '/ellipsis.png' },
+  ]
 
   useEffect(() => {
     const saved = localStorage.getItem('elektraize-theme')
@@ -27,290 +39,277 @@ function App() {
     }
   }, [dark])
 
-  // Şehir seçildiğinde API'den veri çek
+  // Modal dışına tıklandığında kapat
   useEffect(() => {
-    if (selectedCity && selectedCategory) {
-      setLoading(true)
-      getAnomalies(selectedCity, selectedCategory)
-        .then((data) => {
-          setAnomalyData(data)
-          setLoading(false)
-        })
-        .catch((err) => {
-          console.error('API hatası:', err)
-          setAnomalyData([])
-          setLoading(false)
-        })
-    } else {
-      setAnomalyData([])
-    }
-  }, [selectedCity, selectedCategory])
-
-  // Kategori isimlerini backend formatına çevir
-  const categoryMap: Record<string, string> = {
-    mesken: 'mesken',
-    aydınlanma: 'aydinlatma',
-    tarım: 'tarimsal',
-    ticaret: 'ticarethane',
-    genel: 'genel',
-    sanayi: 'sanayi',
-    diğer: 'diger',
-  }
-
-  // API'den gelen verileri grafik formatına çevir
-  // Backend bağlantısı yoksa örnek veriler göster
-  const barData = useMemo(() => {
-    if (anomalyData.length === 0) {
-      // Örnek veriler - görsel amaçlı
-      return [
-        { name: 'Ocak', tüketim: 6200 },
-        { name: 'Şubat', tüketim: 3000 },
-        { name: 'Mart', tüketim: 2800 },
-        { name: 'Nisan', tüketim: 4800 },
-        { name: 'Mayıs', tüketim: 5200 },
-        { name: 'Haziran', tüketim: 6200 },
-      ]
-    }
-    
-    // Aylara göre grupla ve gerçek tüketim değerlerini topla
-    const monthlyData: Record<string, number> = {}
-    anomalyData.forEach((item) => {
-      const month = new Date(item.donem).toLocaleDateString('tr-TR', { month: 'long' })
-      monthlyData[month] = (monthlyData[month] || 0) + item.gercek
-    })
-    
-    return Object.entries(monthlyData)
-      .map(([name, tüketim]) => ({ name, tüketim: Math.round(tüketim) }))
-      .sort((a, b) => {
-        const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
-        return months.indexOf(a.name.toLowerCase()) - months.indexOf(b.name.toLowerCase())
-      })
-  }, [anomalyData])
-
-  // Kümülatif Tüketim Eğrisi - Ay ay toplanarak artan eğri
-  const cumulativeData = useMemo(() => {
-    if (anomalyData.length === 0) {
-      // Örnek veriler - görsel amaçlı (kümülatif)
-      let total = 0
-      return [
-        { ay: 'Ocak', toplamTüketim: total += 6200 },
-        { ay: 'Şubat', toplamTüketim: total += 3000 },
-        { ay: 'Mart', toplamTüketim: total += 2800 },
-        { ay: 'Nisan', toplamTüketim: total += 4800 },
-        { ay: 'Mayıs', toplamTüketim: total += 5200 },
-        { ay: 'Haziran', toplamTüketim: total += 6200 },
-      ]
-    }
-    
-    // Aylara göre grupla ve gerçek tüketim değerlerini topla
-    const monthlyData: Record<string, number> = {}
-    anomalyData.forEach((item) => {
-      const month = new Date(item.donem).toLocaleDateString('tr-TR', { month: 'long' })
-      monthlyData[month] = (monthlyData[month] || 0) + item.gercek
-    })
-    
-    // Ayları sırala
-    const months = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık']
-    const sortedMonths = Object.entries(monthlyData)
-      .map(([ay, tüketim]) => ({ ay, tüketim: Math.round(tüketim) }))
-      .sort((a, b) => {
-        return months.indexOf(a.ay.toLowerCase()) - months.indexOf(b.ay.toLowerCase())
-      })
-    
-    // Kümülatif toplam hesapla - her ay bir önceki ayın değerini ekleyerek artar
-    let cumulativeTotal = 0
-    return sortedMonths.map((item) => {
-      cumulativeTotal += item.tüketim
-      return {
-        ay: item.ay,
-        toplamTüketim: cumulativeTotal
+    if (!datePickerOpen) return
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (!target.closest('.date-picker-container')) {
+        setDatePickerOpen(false)
       }
-    })
-  }, [anomalyData])
-
-  const pieData = useMemo(() => {
-    if (anomalyData.length === 0) {
-      // Örnek veriler - görsel amaçlı (sektör dağılımı)
-      // Sol paneldeki kategorilere göre
-      return [
-        { name: 'Mesken', value: 24 },
-        { name: 'Aydınlanma', value: 15 },
-        { name: 'Tarım', value: 12 },
-        { name: 'Ticaret', value: 18 },
-        { name: 'Genel', value: 8 },
-        { name: 'Sanayi', value: 13 },
-        { name: 'Diğer', value: 10 },
-      ]
     }
-    
-    // Anomali ve normal verileri say
-    const anomalyCount = anomalyData.filter((item) => item.anomali).length
-    const normalCount = anomalyData.length - anomalyCount
-    
-    return [
-      { name: 'Anomali', value: anomalyCount },
-      { name: 'Normal', value: normalCount },
-    ]
-  }, [anomalyData])
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [datePickerOpen])
 
-  const areaData = useMemo(() => {
-    if (anomalyData.length === 0) {
-      // Örnek veriler - görsel amaçlı (günlük güç dağılımı)
-      return [
-        { zaman: '1 Gün', güç: 260 },
-        { zaman: '2 Gün', güç: 240 },
-        { zaman: '3 Gün', güç: 220 },
-        { zaman: '4 Gün', güç: 200 },
-        { zaman: '5 Gün', güç: 195 },
-        { zaman: '6 Gün', güç: 190 },
-        { zaman: '7 Gün', güç: 185 },
-        { zaman: '8 Gün', güç: 180 },
-        { zaman: '9 Gün', güç: 175 },
-        { zaman: '10 Gün', güç: 170 },
-        { zaman: '11 Gün', güç: 165 },
-        { zaman: '12 Gün', güç: 160 },
-      ]
+  // İkisi de seçildiğinde scroll yap ve grafikleri güncelle
+  useEffect(() => {
+    if (selectedFilter && startDate && endDate) {
+      setTimeout(() => {
+        chartsSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 300)
+      // Grafik verilerini rastgele güncellemek için state'i tetikle
+      // useMemo bağımlılıklarına selectedFilter, startDate, endDate ekleyerek yeniden hesaplama yapılacak
     }
-    
-    // Tarihe göre sırala ve gerçek değerleri al
-    const sorted = [...anomalyData].sort((a, b) => 
-      new Date(a.donem).getTime() - new Date(b.donem).getTime()
-    )
-    
-    return sorted.slice(0, 12).map((item) => ({
-      zaman: new Date(item.donem).toLocaleDateString('tr-TR', { month: 'short', day: 'numeric' }),
-      güç: Math.round(item.gercek),
-    }))
-  }, [anomalyData])
+  }, [selectedFilter, startDate, endDate])
 
-  const COLORS = ['#00FFFF', '#3065AC', '#2563EB', '#3b82f6', '#60a5fa']
+  // Rastgele grafik verileri - filtre ve tarih seçildiğinde yeniden hesaplanır
+  const barData = useMemo(() => [
+    { name: 'Ocak', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+    { name: 'Şubat', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+    { name: 'Mart', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+    { name: 'Nisan', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+    { name: 'Mayıs', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+    { name: 'Haziran', tüketim: Math.floor(Math.random() * 5000) + 2000 },
+  ], [selectedFilter, startDate, endDate])
+
+  const lineData = useMemo(() => [
+    { ay: 'Ocak', üretim: Math.floor(Math.random() * 4000) + 3000 },
+    { ay: 'Şubat', üretim: Math.floor(Math.random() * 4000) + 3000 },
+    { ay: 'Mart', üretim: Math.floor(Math.random() * 4000) + 3000 },
+    { ay: 'Nisan', üretim: Math.floor(Math.random() * 4000) + 3000 },
+    { ay: 'Mayıs', üretim: Math.floor(Math.random() * 4000) + 3000 },
+    { ay: 'Haziran', üretim: Math.floor(Math.random() * 4000) + 3000 },
+  ], [selectedFilter, startDate, endDate])
+
+  const pieData = useMemo(() => [
+    { name: 'Sanayi', value: Math.floor(Math.random() * 300) + 100 },
+    { name: 'Konut', value: Math.floor(Math.random() * 300) + 100 },
+    { name: 'Ticaret', value: Math.floor(Math.random() * 300) + 100 },
+    { name: 'Tarım', value: Math.floor(Math.random() * 300) + 100 },
+  ], [selectedFilter, startDate, endDate])
+
+  const areaData = useMemo(() => [
+    { zaman: '00:00', güç: Math.floor(Math.random() * 200) + 50 },
+    { zaman: '04:00', güç: Math.floor(Math.random() * 200) + 50 },
+    { zaman: '08:00', güç: Math.floor(Math.random() * 200) + 50 },
+    { zaman: '12:00', güç: Math.floor(Math.random() * 200) + 50 },
+    { zaman: '16:00', güç: Math.floor(Math.random() * 200) + 50 },
+    { zaman: '20:00', güç: Math.floor(Math.random() * 200) + 50 },
+  ], [selectedFilter, startDate, endDate])
+
+  const COLORS = ['#a78bfa', '#fbbf24', '#c084fc', '#fcd34d', '#d8b4fe']
 
   return (
     <div className="bg-[#000035] text-gray-100">
-      <header className="sticky top-0 z-10 backdrop-blur border-b border-white/10 bg-transparent">
-        <div className="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/10 bg-[#000035]/95">
+        <div className="mx-auto w-full px-6 py-5 flex items-center justify-between gap-6">
+          <div className="flex items-center gap-4 flex-shrink-0">
             <img 
-              src="/Ekran görüntüsü 2025-10-31 200345.png" 
+              src="/lightning (1).png" 
               alt="ElektrAize Logo" 
-              className="h-10 w-auto object-contain"
+              className="h-16 w-auto object-contain"
             />
             <div>
-              <h1 className="text-xl font-semibold tracking-tight">ElektrAize</h1>
+              <h1 className="text-5xl font-semibold tracking-tight">ElektrAize</h1>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <button
-              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm shadow-sm bg-white/10 hover:bg-white/15 transition"
-            >
-              <span>Filtrele</span>
-            </button>
+          <div className="flex items-center gap-5 flex-wrap justify-end">
+            {/* Animated Filter Buttons */}
+            <div className="flex items-center gap-4 relative">
+              {filterCategories.map((category, index) => {
+                // Her butonun yaklaşık genişliği + gap = ~70px (yuvarlak butonlar için)
+                const buttonWidth = 70
+                const startOffset = buttonWidth * (index + 1)
+                return (
+                  <div key={category.label} className="relative group">
+                    <button
+                      onClick={() => setSelectedFilter(category.label)}
+                      className="inline-flex items-center justify-center rounded-full w-14 h-14 bg-transparent hover:bg-white/10 transition-all duration-200"
+                      style={{
+                        transform: filterOpen 
+                          ? `translateX(0)` 
+                          : `translateX(${startOffset}px)`,
+                        opacity: filterOpen ? 1 : 0,
+                        pointerEvents: filterOpen ? 'auto' : 'none',
+                        transition: filterOpen
+                          ? `transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out`
+                          : `transform 0.35s cubic-bezier(0.55, 0.055, 0.675, 0.19), opacity 0.2s ease-in`,
+                        transitionDelay: filterOpen 
+                          ? `${index * 0.05}s` 
+                          : `${(filterCategories.length - index - 1) * 0.03}s`,
+                      }}
+                    >
+                      <img 
+                        src={category.icon} 
+                        alt={category.label}
+                        className="w-12 h-12 object-contain"
+                      />
+                    </button>
+                    {/* Tooltip - sadece filtrele açıkken görünsün */}
+                    {filterOpen && (
+                      <div className="absolute right-0 -top-1 translate-x-full mr-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                        <div className="bg-[#000035]/95 border border-white/20 rounded-md px-2 py-1 text-xs text-gray-200 capitalize shadow-lg">
+                          {category.label}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+            <div className="relative">
+              <button
+                onClick={() => setFilterOpen(!filterOpen)}
+                className="inline-flex items-center gap-2 rounded-md border border-white/20 px-4 py-2.5 text-base shadow-sm bg-white/10 hover:bg-white/15 transition whitespace-nowrap"
+              >
+                <span>Filtrele</span>
+              </button>
+              {/* Tik işareti - filtre seçildiğinde */}
+              {selectedFilter && (
+                <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-[#000035]">
+                  <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div className="relative date-picker-container">
+              <button
+                onClick={() => setDatePickerOpen(!datePickerOpen)}
+                className="inline-flex items-center justify-center rounded-full w-14 h-14 bg-transparent hover:bg-white/10 transition-all duration-200 relative"
+                title="Tarih aralığı seç"
+              >
+                <img 
+                  src="/clock.png" 
+                  alt="Tarih seçici"
+                  className="w-12 h-12 object-contain"
+                />
+                {/* Tik işareti - tarih seçildiğinde */}
+                {startDate && endDate && (
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center border-2 border-[#000035]">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                )}
+              </button>
+              {datePickerOpen && (
+                <div className="absolute right-0 top-12 z-50 bg-[#000035] border border-white/20 rounded-lg p-4 shadow-xl min-w-[280px]">
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-gray-300">Başlangıç Tarihi</label>
+                      <input
+                        type="date"
+                        min="2020-01-01"
+                        max="2025-12-31"
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-1 text-gray-300">Bitiş Tarihi</label>
+                      <input
+                        type="date"
+                        min="2020-01-01"
+                        max="2025-12-31"
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                        className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 text-sm"
+                      />
+                    </div>
+                    <div className="flex gap-2 justify-end mt-2">
+                      <button
+                        onClick={() => {
+                          setStartDate('')
+                          setEndDate('')
+                          setDatePickerOpen(false)
+                        }}
+                        className="px-3 py-1.5 text-sm rounded-md bg-white/10 hover:bg-white/15 transition border border-white/20"
+                      >
+                        Temizle
+                      </button>
+                      <button
+                        onClick={() => setDatePickerOpen(false)}
+                        className="px-3 py-1.5 text-sm rounded-md bg-cyan-500 hover:bg-cyan-600 transition"
+                      >
+                        Tamam
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             <button
               onClick={() => setDark((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm shadow-sm bg-white/10 hover:bg-white/15 transition"
+              className="inline-flex items-center justify-center rounded-full w-14 h-14 bg-transparent hover:bg-white/10 transition-all duration-200"
+              title={dark ? 'Gündüz moduna geç' : 'Gece moduna geç'}
             >
-              <span className="i">{dark ? '☾' : '☀'}</span>
-              <span>{dark ? 'Gece modu' : 'Gündüz modu'}</span>
+              <img 
+                src={dark ? '/crescent-moon.png' : '/contrast.png'} 
+                alt={dark ? 'Gece modu' : 'Gündüz modu'}
+                className="w-12 h-12 object-contain"
+              />
             </button>
           </div>
         </div>
       </header>
 
-      {/* Sol sabit menü - Fixed pozisyon için flex dışında */}
-      <div className="fixed left-6 top-24 z-50">
-        <div className="flex flex-col gap-0 rounded-2xl border border-white/15 bg-[#2E3B49]/95 px-6 py-16 shadow-lg text-white w-72">
-          {['mesken', 'aydınlanma', 'tarım', 'ticaret', 'genel', 'sanayi', 'diğer'].map((label) => {
-            const backendCategory = categoryMap[label]
-            const isSelected = selectedCategory === backendCategory
-            return (
-              <div
-                key={label}
-                onClick={() => {
-                  setSelectedCategory(backendCategory)
-                  setSelectedCity(null) // Kategori değişince şehir seçimini sıfırla
-                }}
-                className={`select-none px-5 py-5 text-base font-semibold text-white/95 hover:bg-[#3065AC] cursor-pointer capitalize border-b border-white/10 last:border-b-0 transition ${
-                  isSelected ? 'bg-[#3065AC] border-l-4 border-[#00FFFF]' : ''
-                }`}
-              >
-                • {label}
-              </div>
-            )
-          })}
-        </div>
-      </div>
-
-      <main className="ml-[300px]">
+      <main className="pt-24">
         {/* Sadece harita kalsın */}
 
-        <section>
-          <div className="mx-auto max-w-6xl px-4 py-10">
-            <div className="flex items-start gap-4">
+        <section className="relative z-10 w-full">
+          <div className="mx-auto w-full px-4 py-12">
+            <div className="flex items-center justify-center gap-4 w-full">
               {/* Leaflet Map */}
-              <div>
-                <LeafletTurkeyMap
-                  dark={dark}
-                  category={selectedCategory}
-                  onCitySelect={(cityName) => {
-                    setSelectedCity(cityName)
-                  }}
-                />
-                {selectedCity && (
-                  <div className="mt-4 p-4 bg-[#2E3B49]/90 rounded-xl border border-white/10">
-                    <p className="text-sm text-gray-300">
-                      <span className="font-semibold text-[#00FFFF]">Seçili Şehir:</span> {selectedCity}
-                    </p>
-                    <p className="text-sm text-gray-300 mt-1">
-                      <span className="font-semibold text-[#00FFFF]">Kategori:</span> {selectedCategory}
-                    </p>
-                    {loading && <p className="text-sm text-yellow-400 mt-2">Veriler yükleniyor...</p>}
-                  </div>
-                )}
+              <div className="relative z-10 w-full flex justify-center">
+                <LeafletTurkeyMap />
               </div>
             </div>
           </div>
         </section>
 
         {/* Grafikler Bölümü */}
-        <section className="py-16">
+        <section ref={chartsSectionRef} className="py-16">
           <div className="mx-auto max-w-6xl px-4">
             <h2 className="text-2xl font-bold mb-8 text-center">Enerji İstatistikleri</h2>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Bar Chart */}
-              <div className="bg-[#2E3B49]/90 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold mb-4">Aylık Tüketim</h3>
-                <ResponsiveContainer width="100%" height={300}>
+              <div className="bg-[#a78bfa]/30 rounded-2xl p-4 border border-white/10">
+                <h3 className="text-base font-semibold mb-3">Aylık Tüketim</h3>
+                <ResponsiveContainer width="100%" height={220}>
                   <BarChart data={barData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="name" stroke="#93c5fd" />
-                    <YAxis stroke="#93c5fd" />
-                    <Tooltip contentStyle={{ backgroundColor: '#1e3a8a', border: '1px solid #3065AC', borderRadius: '8px', color: '#fff' }} />
-                    <Legend />
-                    <Bar dataKey="tüketim" fill="#00FFFF" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgb(158, 115, 208)" />
+                    <XAxis dataKey="name" stroke="#a78bfa" fontSize={12} />
+                    <YAxis stroke="#a78bfa" fontSize={12} />
+                    <Tooltip contentStyle={{ backgroundColor: '#000035', border: '1px solid #a78bfa', borderRadius: '8px', color: '#fff' }} />
+                    <Legend wrapperStyle={{ fontSize: '12px' }} />
+                    <Bar dataKey="tüketim" fill="#fbbf24" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
-              {/* Kümülatif Tüketim Eğrisi */}
-              <div className="bg-[#2E3B49]/90 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold mb-4">Toplam Tüketim Eğrisi (Yıl İçerisinde Biriken)</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={cumulativeData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="ay" stroke="#93c5fd" />
-                    <YAxis stroke="#93c5fd" />
-                    <Tooltip contentStyle={{ backgroundColor: '#1e3a8a', border: '1px solid #3065AC', borderRadius: '8px', color: '#fff' }} />
-                    <Legend />
-                    <Line type="monotone" dataKey="toplamTüketim" stroke="#3065AC" strokeWidth={2} dot={{ fill: '#3065AC', r: 4 }} />
+              {/* Line Chart */}
+              <div className="bg-[#a78bfa]/30 rounded-2xl p-4 border border-white/10">
+                <h3 className="text-base font-semibold mb-3">Toplam Tüketim Enerjisi</h3>
+                <ResponsiveContainer width="100%" height={220}>
+                  <LineChart data={lineData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(199, 151, 255, 0.92)" />
+                    <XAxis dataKey="ay" stroke="#a78bfa" fontSize={12} />
+                    <YAxis stroke="#a78bfa" fontSize={12} />
+                    <Tooltip contentStyle={{ backgroundColor: '#000035', border: '1px solid #a78bfa', borderRadius: '8px', color: '#fff' }} />
+                    <Legend wrapperStyle={{ fontSize: '12px' }} />
+                    <Line type="monotone" dataKey="üretim" stroke="#fbbf24" strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
 
               {/* Pie Chart */}
-              <div className="bg-[#2E3B49]/90 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold mb-4">Sektör Dağılımı</h3>
-                <ResponsiveContainer width="100%" height={300}>
+              <div className="bg-[#a78bfa]/30 rounded-2xl p-4 border border-white/10">
+                <h3 className="text-base font-semibold mb-3">Sektör Dağılımı</h3>
+                <ResponsiveContainer width="100%" height={220}>
                   <PieChart>
                     <Pie
                       data={pieData}
@@ -322,7 +321,7 @@ function App() {
                         const name = props.name as string
                         return `${name} ${(percent * 100).toFixed(0)}%`
                       }}
-                      outerRadius={100}
+                      outerRadius={70}
                       fill="#8884d8"
                       dataKey="value"
                     >
@@ -330,22 +329,22 @@ function App() {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip contentStyle={{ backgroundColor: '#1e3a8a', border: '1px solid #3065AC', borderRadius: '8px', color: '#fff' }} />
+                    <Tooltip contentStyle={{ backgroundColor: '#000035', border: '1px solid #00FFFF', borderRadius: '8px', color: '#fff' }} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
 
               {/* Area Chart */}
-              <div className="bg-[#2E3B49]/90 rounded-2xl p-6 border border-white/10">
-                <h3 className="text-lg font-semibold mb-4">Günlük Güç Dağılımı</h3>
-                <ResponsiveContainer width="100%" height={300}>
+              <div className="bg-[#a78bfa]/30 rounded-2xl p-4 border border-white/10">
+                <h3 className="text-base font-semibold mb-3">Günlük Güç Dağılımı</h3>
+                <ResponsiveContainer width="100%" height={220}>
                   <AreaChart data={areaData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="zaman" stroke="#93c5fd" />
-                    <YAxis stroke="#93c5fd" />
-                    <Tooltip contentStyle={{ backgroundColor: '#1e3a8a', border: '1px solid #3065AC', borderRadius: '8px', color: '#fff' }} />
-                    <Legend />
-                    <Area type="monotone" dataKey="güç" stroke="#00FFFF" fill="#00FFFF" fillOpacity={0.3} />
+                    <XAxis dataKey="zaman" stroke="#a78bfa" fontSize={12} />
+                    <YAxis stroke="#a78bfa" fontSize={12} />
+                    <Tooltip contentStyle={{ backgroundColor: '#000035', border: '1px solid #a78bfa', borderRadius: '8px', color: '#fff' }} />
+                    <Legend wrapperStyle={{ fontSize: '12px' }} />
+                    <Area type="monotone" dataKey="güç" stroke="#fbbf24" fill="#fbbf24" fillOpacity={0.3} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>

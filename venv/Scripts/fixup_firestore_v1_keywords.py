@@ -1,4 +1,4 @@
-#!C:\Users\ilayd\OneDrive\Desktop\ElektrAize\ElektrAize\venv\Scripts\python.exe
+#!C:\Users\Göksu\OneDrive\Desktop\elektraize\ElektrAize\venv\Scripts\python.exe
 # -*- coding: utf-8 -*-
 # Copyright 2025 Google LLC
 #

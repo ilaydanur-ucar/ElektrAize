@@ -1,0 +1,101 @@
+2025-12-15 12:18:57 | WARNING  | rate_limiter | <module>:57 | Redis bağlantısı başarısız, in-memory kullanılacak: Timeout connecting to server
+2025-12-15 12:18:57 | INFO     | rate_limiter | setup_rate_limiter:104 | Rate limiting middleware aktif ✅
+2025-12-15 12:18:57 | INFO     | main | lifespan:30 | ElektrAize API baslatiliyor...
+2025-12-15 12:18:57 | INFO     | main | lifespan:31 | ============================================================
+2025-12-15 12:18:57 | INFO     | main | lifespan:32 | Tum modeller yukleniyor...
+2025-12-15 12:18:57 | INFO     | main | lifespan:33 | ============================================================
+2025-12-15 12:18:57 | INFO     | anomaly_router | load_all_models:162 | Model yükleme işlemi başlatılıyor
+2025-12-15 12:18:57 | INFO     | anomaly_router | load_all_models:166 | genel kategorisi için model yükleniyor (target: Genel_Toplam_MWh)
+2025-12-15 12:18:57 | INFO     | veri_cek | _initialize:402 | Supabase bağlantısı başarılı (SupabaseManager).
+2025-12-15 12:18:59 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:18:59 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:18:59 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:18:59 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:00 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:00 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:00 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:00 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:00 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:01 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:01 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:01 | INFO     | anomaly_router | load_all_models:198 | genel modeli yüklendi - Train R²: 0.999, Test R²: 0.987
+2025-12-15 12:19:01 | INFO     | anomaly_router | load_all_models:166 | aydinlatma kategorisi için model yükleniyor (target: Aydinlatma_MWh)
+2025-12-15 12:19:01 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:02 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:02 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:02 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:02 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:03 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:03 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:03 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:03 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:04 | INFO     | anomaly_router | load_all_models:198 | aydinlatma modeli yüklendi - Train R²: 0.954, Test R²: 0.859
+2025-12-15 12:19:04 | INFO     | anomaly_router | load_all_models:166 | mesken kategorisi için model yükleniyor (target: Mesken_MWh)
+2025-12-15 12:19:04 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:04 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:04 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:04 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:05 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:05 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:05 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:05 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:05 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:05 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:05 | INFO     | anomaly_router | load_all_models:198 | mesken modeli yüklendi - Train R²: 0.998, Test R²: 0.951
+2025-12-15 12:19:06 | INFO     | anomaly_router | load_all_models:166 | sanayi kategorisi için model yükleniyor (target: Sanayi_MWh)
+2025-12-15 12:19:06 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:06 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:06 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:06 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:07 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:07 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:07 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:07 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:07 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:07 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:07 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:07 | INFO     | anomaly_router | load_all_models:198 | sanayi modeli yüklendi - Train R²: 0.997, Test R²: 0.841
+2025-12-15 12:19:08 | INFO     | anomaly_router | load_all_models:166 | tarimsal kategorisi için model yükleniyor (target: Tarımsal_Sulama_MWh)
+2025-12-15 12:19:08 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:08 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:08 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:08 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:09 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:09 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:09 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:09 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:09 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:09 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:09 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:09 | INFO     | anomaly_router | load_all_models:198 | tarimsal modeli yüklendi - Train R²: 0.957, Test R²: 0.204
+2025-12-15 12:19:10 | INFO     | anomaly_router | load_all_models:166 | ticarethane kategorisi için model yükleniyor (target: Ticarethane_MWh)
+2025-12-15 12:19:10 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:10 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:10 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:10 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:10 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:11 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:11 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:11 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:11 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:11 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:11 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:11 | INFO     | anomaly_router | load_all_models:198 | ticarethane modeli yüklendi - Train R²: 0.996, Test R²: 0.952
+2025-12-15 12:19:12 | INFO     | anomaly_router | load_all_models:166 | diger kategorisi için model yükleniyor (target: Diger_MWh)
+2025-12-15 12:19:12 | INFO     | veri_cek | fetch_tables:423 | genel_elektrik tablosu yüklendi -> (45, 2)
+2025-12-15 12:19:12 | INFO     | veri_cek | fetch_tables:423 | weather tablosu yüklendi -> (1000, 8)
+2025-12-15 12:19:12 | INFO     | veri_cek | fetch_tables:423 | nufus tablosu yüklendi -> (1000, 3)
+2025-12-15 12:19:12 | INFO     | veri_cek | fetch_tables:423 | hizmet tablosu yüklendi -> (44, 6)
+2025-12-15 12:19:13 | INFO     | veri_cek | fetch_tables:423 | train_2022_2023 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:13 | INFO     | veri_cek | fetch_tables:423 | test_2024_2025 tablosu yüklendi -> (1000, 19)
+2025-12-15 12:19:13 | INFO     | veri_cek | build_train_test_frames:452 | Merge bitti -> Train: (1000, 31), Test: (1000, 31)
+2025-12-15 12:19:13 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:13 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:13 | INFO     | veri_cek | add_weather_features:149 | 2 hava durumu kolonu bulundu: ['windspeed_10m_max', 'windgusts_10m_max']...
+2025-12-15 12:19:13 | INFO     | veri_cek | add_population_features:190 | 1 nüfus kolonu bulundu: ['Nufus_Sayisi']...
+2025-12-15 12:19:13 | INFO     | anomaly_router | load_all_models:198 | diger modeli yüklendi - Train R²: 0.993, Test R²: 0.843
+2025-12-15 12:19:14 | INFO     | anomaly_router | load_all_models:217 | Model yükleme tamamlandı: 7/7 model yüklendi
+2025-12-15 12:19:14 | INFO     | main | lifespan:35 | ElektrAize API hazir!
