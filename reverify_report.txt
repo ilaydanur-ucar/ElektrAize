@@ -1,0 +1,15 @@
+STARTING RE-VERIFICATION
+==================================================
+Checking 'model_results' table (expecting success but maybe 0 rows)...
+✅ Supabase 'model_results' accessible. Rows: 5
+{
+  "id": 1,
+  "model_name": "genel",
+  "target_column": "Genel_Toplam_MWh",
+  "train_r2": 0.999,
+  "test_r2": 0.992,
+  "timestamp": "2025-11-02T11:49:31.701271+00:00"
+}
+Redis status: ❌ DOWN (Error 22 connecting to localhost:6379. The remote computer refused the network connection.)
+==================================================
+COMPLETE

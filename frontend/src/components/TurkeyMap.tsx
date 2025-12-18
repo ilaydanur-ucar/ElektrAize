@@ -1,104 +1,132 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { geoMercator, geoPath } from 'd3-geo'
-import { feature } from 'topojson-client'
+import { useEffect, useRef, useState } from 'react'
 
-type Topology = {
-  type: string
-  objects: Record<string, any>
-  arcs: any
-  transform?: any
+// Window interface'ini genişlet
+declare global {
+  interface Window {
+    handleCityClick?: (stateId: string, stateName: string) => void
+  }
 }
 
-type ProvinceFeature = GeoJSON.Feature<GeoJSON.Geometry, { name?: string; id?: string }>
+interface TurkeyMapProps {
+  onCitySelect?: (city: { id: string, name: string }) => void
+}
 
-type Props = {}
+export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
+  const mapContainerRef = useRef<HTMLDivElement>(null)
+  const mapInitialized = useRef(false)
+  const [selectedCity, setSelectedCity] = useState<{ id: string, name: string } | null>(null)
 
-// Veri kaynakları: Sırasıyla dene (yerel -> jsDelivr -> GitHub raw)
-const SOURCES: { url: string; kind: 'geojson' | 'topojson' }[] = [
-  { url: '/turkey-outline.json', kind: 'geojson' },
-]
-
-export default function TurkeyMap({}: Props) {
-  const [provinces, setProvinces] = useState<ProvinceFeature[]>([])
-  const [hoverName, setHoverName] = useState<string>('')
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const [size, setSize] = useState<{ width: number; height: number }>({ width: 800, height: 450 })
+  // onCitySelect referansını ref olarak tut (dependency loop'u önlemek için)
+  const onCitySelectRef = useRef(onCitySelect)
 
   useEffect(() => {
-    const handle = () => {
-      if (!containerRef.current) return
-      const width = containerRef.current.clientWidth
-      const height = Math.max(320, Math.round(width * 0.55))
-      setSize({ width, height })
-    }
-    handle()
-    window.addEventListener('resize', handle)
-    return () => window.removeEventListener('resize', handle)
-  }, [])
+    onCitySelectRef.current = onCitySelect
+  }, [onCitySelect])
 
   useEffect(() => {
-    let mounted = true
-    ;(async () => {
-      for (const src of SOURCES) {
-        try {
-          const res = await fetch(src.url)
-          if (!res.ok) continue
-          const data = await res.json()
-          if (!mounted) return
-          if (src.kind === 'geojson') {
-            const fc = data as GeoJSON.FeatureCollection
-            setProvinces(fc.features as ProvinceFeature[])
-            return
-          } else {
-            const objKey = Object.keys((data as Topology).objects)[0]
-            const fc = feature(data as any, (data as Topology).objects[objKey]) as unknown as GeoJSON.FeatureCollection
-            setProvinces(fc.features as ProvinceFeature[])
-            return
-          }
-        } catch {
-          // try next source
-        }
+    if (mapInitialized.current) return
+
+    // Global callback fonksiyonu - harita bu fonksiyonu çağıracak
+    window.handleCityClick = (stateId: string, stateName: string) => {
+      console.log('🗺️ Şehir tıklandı!')
+      console.log('📍 Şehir ID (Plaka):', stateId)
+      console.log('🏙️ Şehir Adı:', stateName)
+
+      const cityData = { id: stateId, name: stateName }
+      setSelectedCity(cityData)
+
+      // Parent component'e bildir
+      if (onCitySelectRef.current) {
+        onCitySelectRef.current(cityData)
       }
-    })()
+    }
+
+    const loadScript = (src: string): Promise<void> => {
+      return new Promise((resolve, reject) => {
+        // Eğer script zaten yüklüyse, kaldır ve yeniden yükle
+        const existingScript = document.querySelector(`script[src="${src}"]`)
+        if (existingScript) {
+          existingScript.remove()
+        }
+
+        const script = document.createElement('script')
+        script.src = src
+        script.type = 'text/javascript'
+        script.async = false
+        script.onload = () => {
+          console.log(`Loaded: ${src}`)
+          resolve()
+        }
+        script.onerror = () => reject(new Error(`Failed to load script: ${src}`))
+        document.head.appendChild(script)
+      })
+    }
+
+    const initMap = async () => {
+      try {
+        console.log('Harita yükleniyor...')
+
+        // Önce eski map div'ini temizle
+        if (mapContainerRef.current) {
+          mapContainerRef.current.innerHTML = '<div id="map"></div>'
+        }
+
+        // Script'leri yükle
+        await loadScript('/html5countrymapv4.5/mapdata.js')
+        await loadScript('/html5countrymapv4.5/countrymap.js')
+
+        mapInitialized.current = true
+        console.log('Harita başarıyla yüklendi!')
+        console.log('✅ Şehirlere tıklayabilirsiniz!')
+
+      } catch (error) {
+        console.error('Harita yüklenirken hata:', error)
+      }
+    }
+
+    // Küçük bir gecikme ile başlat
+    const timer = setTimeout(() => {
+      initMap()
+    }, 100)
+
     return () => {
-      mounted = false
+      clearTimeout(timer)
+      // Cleanup - global fonksiyonu temizle
+      if (window.handleCityClick) {
+        delete window.handleCityClick
+      }
     }
   }, [])
 
-  const projection = useMemo(() => {
-    // Sabit merkez ve ölçek: genişliğe göre ölçekle, Türkiye ekranı doldursun
-    const baseScale = size.width * 7
-    return geoMercator().center([35.2, 39.0]).scale(baseScale).translate([size.width / 2, size.height / 2])
-  }, [size.width, size.height])
-
-  const pathGen = useMemo(() => geoPath(projection), [projection])
+  // Seçilen şehir değiştiğinde
+  useEffect(() => {
+    if (selectedCity) {
+      console.log('🎯 Aktif şehir:', selectedCity.name, `(${selectedCity.id})`)
+    }
+  }, [selectedCity])
 
   return (
-    <div ref={containerRef} className="w-full">
-      {provinces.length === 0 && (
-        <div className="mb-3 text-sm text-gray-600 dark:text-gray-300">Harita yükleniyor...</div>
+    <div className="w-full relative">
+      {/* Seçilen şehir bilgisi - Sabit pozisyon, haritanın üstünde */}
+      {selectedCity && (
+        <div className="fixed top-24 right-8 z-50 p-4 bg-purple-500/90 backdrop-blur-md border border-purple-400/50 rounded-lg shadow-xl">
+          <p className="text-lg">
+            <span className="font-semibold">Seçilen Şehir:</span>{' '}
+            <span className="text-white">{selectedCity.name}</span>
+            {' '}
+            <span className="text-sm text-purple-200">({selectedCity.id})</span>
+          </p>
+        </div>
       )}
-      <svg width={size.width} height={size.height} className="rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-800 shadow-soft" aria-label={hoverName || 'Türkiye Haritası'}>
-        <g>
-          {provinces.map((prov, i) => {
-            const name = (prov.properties?.name as string) || (prov.properties?.id as string) || `il-${i}`
-            const d = pathGen(prov as any) || undefined
-            return (
-              <path
-                key={name}
-                d={d}
-                className={`transition fill-gray-100 dark:fill-gray-700 stroke-gray-400 dark:stroke-gray-600`}
-                strokeWidth={0.6}
-                onMouseEnter={() => setHoverName(name)}
-                onMouseLeave={() => setHoverName('')}
-                onClick={() => {}}
-              />
-            )
-          })}
-        </g>
-      </svg>
+
+      {/* Harita */}
+      <div
+        ref={mapContainerRef}
+        className="w-full flex justify-center items-center"
+        style={{ minHeight: '800px' }}
+      >
+        <div id="map" style={{ width: '100%', maxWidth: '1600px', height: '800px' }}></div>
+      </div>
     </div>
   )
 }
-
-

@@ -1,20 +1,20 @@
-var simplemaps_countrymap_mapdata={
+var simplemaps_countrymap_mapdata = {
   main_settings: {
-   //General settings
-    width: "responsive", //'700' or 'responsive'
-    background_color: "#FFFFFF",
+    //General settings
+    width: "1400", //'700' or 'responsive'
+    background_color: "transparent",
     background_transparent: "yes",
-    border_color: "#000035",
-    
+    border_color: "transparent",
+
     //State defaults
     state_description: "State description",
     state_color: "#3a49b8",
     state_hover_color: "#ffe646",
     state_url: "",
-    border_size: 1.5,
+    border_size: 0,
     all_states_inactive: "no",
     all_states_zoomable: "no",
-    
+
     //Location defaults
     location_description: "Location description",
     location_url: "",
@@ -25,11 +25,11 @@ var simplemaps_countrymap_mapdata={
     location_type: "circle",
     location_image_source: "frog.png",
     location_border_color: "#FFFFFF",
-    location_border: 1,
-    location_hover_border: 1.5,
+    location_border: 2,
+    location_hover_border: 2.5,
     all_locations_inactive: "no",
     all_locations_hidden: "no",
-    
+
     //Label defaults
     label_color: "#ffffff",
     label_hover_color: "#ffffff",
@@ -39,7 +39,7 @@ var simplemaps_countrymap_mapdata={
     label_scale: "yes",
     hide_labels: "no",
     hide_eastern_labels: "no",
-   
+
     //Zoom settings
     zoom: "no",
     manual_zoom: "no",
@@ -49,10 +49,10 @@ var simplemaps_countrymap_mapdata={
     initial_zoom_solo: "no",
     region_opacity: 1,
     region_hover_opacity: 0.6,
-    zoom_out_incrementally: "no",
+    zoom_out_incrementally: "yes",
     zoom_percentage: 0.99,
     zoom_time: 0.5,
-    
+
     //Popup settings
     popup_color: "white",
     popup_opacity: 0.9,
@@ -60,7 +60,7 @@ var simplemaps_countrymap_mapdata={
     popup_corners: 5,
     popup_font: "12px/1.5 Verdana, Arial, Helvetica, sans-serif",
     popup_nocss: "no",
-    
+
     //Advanced settings
     div: "map",
     auto_load: "yes",
@@ -75,256 +75,335 @@ var simplemaps_countrymap_mapdata={
   },
   state_specific: {
     TR01: {
-      name: "Adana"
+      name: "Adana",
+      url: "javascript:handleCityClick('TR01', 'Adana')"
     },
     TR02: {
-      name: "Adiyaman"
+      name: "Adiyaman",
+      url: "javascript:handleCityClick('TR02', 'Adiyaman')"
     },
     TR03: {
-      name: "Afyonkarahisar"
+      name: "Afyonkarahisar",
+      url: "javascript:handleCityClick('TR03', 'Afyonkarahisar')"
     },
     TR04: {
-      name: "Agri"
+      name: "Agri",
+      url: "javascript:handleCityClick('TR04', 'Agri')"
     },
     TR05: {
-      name: "Amasya"
+      name: "Amasya",
+      url: "javascript:handleCityClick('TR05', 'Amasya')"
     },
     TR06: {
-      name: "Ankara"
+      name: "Ankara",
+      url: "javascript:handleCityClick('TR06', 'Ankara')"
     },
     TR07: {
-      name: "Antalya"
+      name: "Antalya",
+      url: "javascript:handleCityClick('TR07', 'Antalya')"
     },
     TR08: {
-      name: "Artvin"
+      name: "Artvin",
+      url: "javascript:handleCityClick('TR08', 'Artvin')"
     },
     TR09: {
-      name: "Aydin"
+      name: "Aydin",
+      url: "javascript:handleCityClick('TR09', 'Aydin')"
     },
     TR10: {
-      name: "Balikesir"
+      name: "Balikesir",
+      url: "javascript:handleCityClick('TR10', 'Balikesir')"
     },
     TR11: {
-      name: "Bilecik"
+      name: "Bilecik",
+      url: "javascript:handleCityClick('TR11', 'Bilecik')"
     },
     TR12: {
-      name: "Bingöl"
+      name: "Bingöl",
+      url: "javascript:handleCityClick('TR12', 'Bingöl')"
     },
     TR13: {
-      name: "Bitlis"
+      name: "Bitlis",
+      url: "javascript:handleCityClick('TR13', 'Bitlis')"
     },
     TR14: {
-      name: "Bolu"
+      name: "Bolu",
+      url: "javascript:handleCityClick('TR14', 'Bolu')"
     },
     TR15: {
-      name: "Burdur"
+      name: "Burdur",
+      url: "javascript:handleCityClick('TR15', 'Burdur')"
     },
     TR16: {
-      name: "Bursa"
+      name: "Bursa",
+      url: "javascript:handleCityClick('TR16', 'Bursa')"
     },
     TR17: {
-      name: "Çanakkale"
+      name: "Çanakkale",
+      url: "javascript:handleCityClick('TR17', 'Çanakkale')"
     },
     TR18: {
-      name: "Çankiri"
+      name: "Çankiri",
+      url: "javascript:handleCityClick('TR18', 'Çankiri')"
     },
     TR19: {
-      name: "Çorum"
+      name: "Çorum",
+      url: "javascript:handleCityClick('TR19', 'Çorum')"
     },
     TR20: {
-      name: "Denizli"
+      name: "Denizli",
+      url: "javascript:handleCityClick('TR20', 'Denizli')"
     },
     TR21: {
-      name: "Diyarbakir"
+      name: "Diyarbakir",
+      url: "javascript:handleCityClick('TR21', 'Diyarbakir')"
     },
     TR22: {
-      name: "Edirne"
+      name: "Edirne",
+      url: "javascript:handleCityClick('TR22', 'Edirne')"
     },
     TR23: {
-      name: "Elazig"
+      name: "Elazig",
+      url: "javascript:handleCityClick('TR23', 'Elazig')"
     },
     TR24: {
-      name: "Erzincan"
+      name: "Erzincan",
+      url: "javascript:handleCityClick('TR24', 'Erzincan')"
     },
     TR25: {
-      name: "Erzurum"
+      name: "Erzurum",
+      url: "javascript:handleCityClick('TR25', 'Erzurum')"
     },
     TR26: {
-      name: "Eskisehir"
+      name: "Eskisehir",
+      url: "javascript:handleCityClick('TR26', 'Eskisehir')"
     },
     TR27: {
-      name: "Gaziantep"
+      name: "Gaziantep",
+      url: "javascript:handleCityClick('TR27', 'Gaziantep')"
     },
     TR28: {
-      name: "Giresun"
+      name: "Giresun",
+      url: "javascript:handleCityClick('TR28', 'Giresun')"
     },
     TR29: {
-      name: "Gümüshane"
+      name: "Gümüshane",
+      url: "javascript:handleCityClick('TR29', 'Gümüshane')"
     },
     TR30: {
-      name: "Hakkari"
+      name: "Hakkari",
+      url: "javascript:handleCityClick('TR30', 'Hakkari')"
     },
     TR31: {
-      name: "Hatay"
+      name: "Hatay",
+      url: "javascript:handleCityClick('TR31', 'Hatay')"
     },
     TR32: {
-      name: "Isparta"
+      name: "Isparta",
+      url: "javascript:handleCityClick('TR32', 'Isparta')"
     },
     TR33: {
-      name: "Mersin"
+      name: "Mersin",
+      url: "javascript:handleCityClick('TR33', 'Mersin')"
     },
     TR34: {
-      name: "Istanbul"
+      name: "Istanbul",
+      url: "javascript:handleCityClick('TR34', 'Istanbul')"
     },
     TR35: {
-      name: "Izmir"
+      name: "Izmir",
+      url: "javascript:handleCityClick('TR35', 'Izmir')"
     },
     TR36: {
-      name: "Kars"
+      name: "Kars",
+      url: "javascript:handleCityClick('TR36', 'Kars')"
     },
     TR37: {
-      name: "Kastamonu"
+      name: "Kastamonu",
+      url: "javascript:handleCityClick('TR37', 'Kastamonu')"
     },
     TR38: {
-      name: "Kayseri"
+      name: "Kayseri",
+      url: "javascript:handleCityClick('TR38', 'Kayseri')"
     },
     TR39: {
-      name: "Kirklareli"
+      name: "Kirklareli",
+      url: "javascript:handleCityClick('TR39', 'Kirklareli')"
     },
     TR40: {
-      name: "Kirsehir"
+      name: "Kirsehir",
+      url: "javascript:handleCityClick('TR40', 'Kirsehir')"
     },
     TR41: {
-      name: "Kocaeli"
+      name: "Kocaeli",
+      url: "javascript:handleCityClick('TR41', 'Kocaeli')"
     },
     TR42: {
-      name: "Konya"
+      name: "Konya",
+      url: "javascript:handleCityClick('TR42', 'Konya')"
     },
     TR43: {
-      name: "Kütahya"
+      name: "Kütahya",
+      url: "javascript:handleCityClick('TR43', 'Kütahya')"
     },
     TR44: {
-      name: "Malatya"
+      name: "Malatya",
+      url: "javascript:handleCityClick('TR44', 'Malatya')"
     },
     TR45: {
-      name: "Manisa"
+      name: "Manisa",
+      url: "javascript:handleCityClick('TR45', 'Manisa')"
     },
     TR46: {
-      name: "K. Maras"
+      name: "K. Maras",
+      url: "javascript:handleCityClick('TR46', 'K. Maras')"
     },
     TR47: {
-      name: "Mardin"
+      name: "Mardin",
+      url: "javascript:handleCityClick('TR47', 'Mardin')"
     },
     TR48: {
-      name: "Mugla"
+      name: "Mugla",
+      url: "javascript:handleCityClick('TR48', 'Mugla')"
     },
     TR49: {
-      name: "Mus"
+      name: "Mus",
+      url: "javascript:handleCityClick('TR49', 'Mus')"
     },
     TR50: {
-      name: "Nevsehir"
+      name: "Nevsehir",
+      url: "javascript:handleCityClick('TR50', 'Nevsehir')"
     },
     TR51: {
-      name: "Nigde"
+      name: "Nigde",
+      url: "javascript:handleCityClick('TR51', 'Nigde')"
     },
     TR52: {
-      name: "Ordu"
+      name: "Ordu",
+      url: "javascript:handleCityClick('TR52', 'Ordu')"
     },
     TR53: {
-      name: "Rize"
+      name: "Rize",
+      url: "javascript:handleCityClick('TR53', 'Rize')"
     },
     TR54: {
-      name: "Sakarya"
+      name: "Sakarya",
+      url: "javascript:handleCityClick('TR54', 'Sakarya')"
     },
     TR55: {
-      name: "Samsun"
+      name: "Samsun",
+      url: "javascript:handleCityClick('TR55', 'Samsun')"
     },
     TR56: {
-      name: "Siirt"
+      name: "Siirt",
+      url: "javascript:handleCityClick('TR56', 'Siirt')"
     },
     TR57: {
-      name: "Sinop"
+      name: "Sinop",
+      url: "javascript:handleCityClick('TR57', 'Sinop')"
     },
     TR58: {
-      name: "Sivas"
+      name: "Sivas",
+      url: "javascript:handleCityClick('TR58', 'Sivas')"
     },
     TR59: {
-      name: "Tekirdag"
+      name: "Tekirdag",
+      url: "javascript:handleCityClick('TR59', 'Tekirdag')"
     },
     TR60: {
-      name: "Tokat"
+      name: "Tokat",
+      url: "javascript:handleCityClick('TR60', 'Tokat')"
     },
     TR61: {
-      name: "Trabzon"
+      name: "Trabzon",
+      url: "javascript:handleCityClick('TR61', 'Trabzon')"
     },
     TR62: {
-      name: "Tunceli"
+      name: "Tunceli",
+      url: "javascript:handleCityClick('TR62', 'Tunceli')"
     },
     TR63: {
-      name: "Sanliurfa"
+      name: "Sanliurfa",
+      url: "javascript:handleCityClick('TR63', 'Sanliurfa')"
     },
     TR64: {
-      name: "Usak"
+      name: "Usak",
+      url: "javascript:handleCityClick('TR64', 'Usak')"
     },
     TR65: {
-      name: "Van"
+      name: "Van",
+      url: "javascript:handleCityClick('TR65', 'Van')"
     },
     TR66: {
-      name: "Yozgat"
+      name: "Yozgat",
+      url: "javascript:handleCityClick('TR66', 'Yozgat')"
     },
     TR67: {
-      name: "Zinguldak"
+      name: "Zinguldak",
+      url: "javascript:handleCityClick('TR67', 'Zinguldak')"
     },
     TR68: {
-      name: "Aksaray"
+      name: "Aksaray",
+      url: "javascript:handleCityClick('TR68', 'Aksaray')"
     },
     TR69: {
-      name: "Bayburt"
+      name: "Bayburt",
+      url: "javascript:handleCityClick('TR69', 'Bayburt')"
     },
     TR70: {
-      name: "Karaman"
+      name: "Karaman",
+      url: "javascript:handleCityClick('TR70', 'Karaman')"
     },
     TR71: {
-      name: "Kinkkale"
+      name: "Kinkkale",
+      url: "javascript:handleCityClick('TR71', 'Kinkkale')"
     },
     TR72: {
-      name: "Batman"
+      name: "Batman",
+      url: "javascript:handleCityClick('TR72', 'Batman')"
     },
     TR73: {
-      name: "Sirnak"
+      name: "Sirnak",
+      url: "javascript:handleCityClick('TR73', 'Sirnak')"
     },
     TR74: {
-      name: "Bartın"
+      name: "Bartın",
+      url: "javascript:handleCityClick('TR74', 'Bartın')"
     },
     TR75: {
-      name: "Ardahan"
+      name: "Ardahan",
+      url: "javascript:handleCityClick('TR75', 'Ardahan')"
     },
     TR76: {
-      name: "Iğdir"
+      name: "Iğdir",
+      url: "javascript:handleCityClick('TR76', 'Iğdir')"
     },
     TR77: {
-      name: "Yalova"
+      name: "Yalova",
+      url: "javascript:handleCityClick('TR77', 'Yalova')"
     },
     TR78: {
-      name: "Karabük"
+      name: "Karabük",
+      url: "javascript:handleCityClick('TR78', 'Karabük')"
     },
     TR79: {
-      name: "Kilis"
+      name: "Kilis",
+      url: "javascript:handleCityClick('TR79', 'Kilis')"
     },
     TR80: {
-      name: "Osmaniye"
+      name: "Osmaniye",
+      url: "javascript:handleCityClick('TR80', 'Osmaniye')"
     },
     TR81: {
-      name: "Düzce"
+      name: "Düzce",
+      url: "javascript:handleCityClick('TR81', 'Düzce')"
     }
   },
   locations: {
     "0": {
       name: "Ankara",
       lat: "39.911652",
-      lng: "32.840305",
-      size: 8,
-      type: "circle"
+      lng: "32.840305"
     }
   },
   labels: {

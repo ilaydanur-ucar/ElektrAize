@@ -1,0 +1,65 @@
+
+============================================================
+VERITABANI BAGLANTI VE VERI DEMOSU
+============================================================
+
+[1] SUPABASE ('model_results' tablosu)
+----------------------------------------
+✅ Başarılı! 5 kayıt çekildi:
+
+[
+  {
+    "id": 1,
+    "model_name": "genel",
+    "target_column": "Genel_Toplam_MWh",
+    "train_r2": 0.999,
+    "test_r2": 0.992,
+    "timestamp": "2025-11-02T11:49:31.701271+00:00"
+  },
+  {
+    "id": 2,
+    "model_name": "aydinlatma",
+    "target_column": "Aydinlatma_MWh",
+    "train_r2": 0.954,
+    "test_r2": 0.865,
+    "timestamp": "2025-11-02T11:49:33.126628+00:00"
+  },
+  {
+    "id": 3,
+    "model_name": "mesken",
+    "target_column": "Mesken_MWh",
+    "train_r2": 0.998,
+    "test_r2": 0.958,
+    "timestamp": "2025-11-02T11:49:34.531038+00:00"
+  },
+  {
+    "id": 4,
+    "model_name": "sanayi",
+    "target_column": "Sanayi_MWh",
+    "train_r2": 0.997,
+    "test_r2": 0.836,
+    "timestamp": "2025-11-02T11:49:35.987748+00:00"
+  },
+  {
+    "id": 5,
+    "model_name": "tarimsal",
+    "target_column": "Tar\u0131msal_Sulama_MWh",
+    "train_r2": 0.946,
+    "test_r2": 0.206,
+    "timestamp": "2025-11-02T11:49:37.307517+00:00"
+  }
+]
+
+
+[2] FIREBASE (Firestore)
+----------------------------------------
+⚠️ Hiçbir koleksiyonda veri bulunamadı veya koleksiyon yok.
+---------------------------------------- [Firebase Bitti]
+
+
+[3] REDIS (Önbellek)
+----------------------------------------
+❌ Redis henüz çalışmıyor (Hata: Error 22 connecting to localhost:6379. The remote computer refused the network connection.).
+   Not: Redis kritik değil, uygulama in-memory modda devam edebilir.
+
+============================================================

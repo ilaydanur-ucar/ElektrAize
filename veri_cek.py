@@ -411,20 +411,49 @@ class SupabaseManager:
             logger.error(f"{table_name} çekilemedi: {e}")
             return pd.DataFrame()
 
-def fetch_tables() -> Dict[str, pd.DataFrame]:
-    """Tüm tabloları paralel olarak çek (optimize)"""
+# ===================== GLOBAL CACHE =====================
+_DATA_CACHE = {}
+
+def clear_cache():
+    """Cache'i temizle"""
+    global _DATA_CACHE
+    _DATA_CACHE = {}
+    logger.info("Veri cache temizlendi.")
+
+def fetch_tables(use_cache: bool = True) -> Dict[str, pd.DataFrame]:
+    """Tüm tabloları paralel olarak çek (optimize + cache)"""
+    global _DATA_CACHE
+    
+    if use_cache and _DATA_CACHE:
+        # Basit kontrol: Önemli tablolar dolu mu?
+        if (not _DATA_CACHE.get("nufus", pd.DataFrame()).empty and 
+            not _DATA_CACHE.get("hizmet", pd.DataFrame()).empty and 
+            not _DATA_CACHE.get("weather", pd.DataFrame()).empty):
+             logger.info("Tablolar cache'den alındı.")
+             return _DATA_CACHE.copy()
+    
     sb = SupabaseManager()
     dfs = {}
     
     for nick, table in TABLES.items():
         try:
+            # Eğer cache'de varsa ve boş değilse koru (partial update durumunda)
+            if use_cache and nick in _DATA_CACHE and not _DATA_CACHE[nick].empty:
+                dfs[nick] = _DATA_CACHE[nick]
+                continue
+
             df = sb.fetch_table(table)
             dfs[nick] = df
             logger.info(f"{table} tablosu yüklendi -> {df.shape}")
         except Exception as e:
             logger.warning(f"{table} tablosu çekilemedi: {e}", exc_info=True)
-            dfs[nick] = pd.DataFrame()
-    
+            # Cache'de varsa eskisini kullan, yoksa boş
+            dfs[nick] = _DATA_CACHE.get(nick, pd.DataFrame())
+            
+    # Cache güncelle
+    if use_cache:
+        _DATA_CACHE = dfs
+        
     return dfs
 
 # ===================== ANA PIPELINE =====================

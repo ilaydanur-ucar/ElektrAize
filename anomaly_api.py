@@ -294,14 +294,14 @@ def anomalies(
         y_val = float(np.array(yhat).ravel()[0])
 
         # Supabase'e kaydet (city kolonu tabloda yok, sadece prediction ve created_at kaydediyoruz)
-        try:
-            data = {
-                "prediction": y_val,
-                "created_at": datetime.now().isoformat(),
-            }
-            supabase.table("model_results").insert(data).execute()
-        except Exception as e:
-            print(f"[WARN] Supabase'e kayıt yapılamadı: {e}")
+        # try:
+        #     data = {
+        #         "prediction": y_val,
+        #         "created_at": datetime.now().isoformat(),
+        #     }
+        #     supabase.table("model_results").insert(data).execute()
+        # except Exception as e:
+        #     print(f"[WARN] Supabase'e kayıt yapılamadı: {e}")
             # Devam et, bu kritik değil
 
         

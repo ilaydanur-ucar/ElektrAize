@@ -1,0 +1,50 @@
+Starting verification of all databases...
+
+==================================================
+SUPABASE VERIFICATION
+==================================================
+Attempting to fetch last 5 entries from 'model_results'...
+❌ Supabase Error: {'message': 'column model_results.created_at does not exist', 'code': '42703', 'hint': None, 'details': None}
+
+==================================================
+FIREBASE VERIFICATION
+==================================================
+Attempting to list collections (first 5)...
+❌ Firebase Error: 403 Cloud Firestore API has not been used in project elektraize-90beb before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=elektraize-90beb then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry. [reason: "SERVICE_DISABLED"
+domain: "googleapis.com"
+metadata {
+  key: "service"
+  value: "firestore.googleapis.com"
+}
+metadata {
+  key: "serviceTitle"
+  value: "Cloud Firestore API"
+}
+metadata {
+  key: "containerInfo"
+  value: "elektraize-90beb"
+}
+metadata {
+  key: "consumer"
+  value: "projects/elektraize-90beb"
+}
+metadata {
+  key: "activationUrl"
+  value: "https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=elektraize-90beb"
+}
+, locale: "en-US"
+message: "Cloud Firestore API has not been used in project elektraize-90beb before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=elektraize-90beb then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+, links {
+  description: "Google developers console API activation"
+  url: "https://console.developers.google.com/apis/api/firestore.googleapis.com/overview?project=elektraize-90beb"
+}
+]
+
+==================================================
+REDIS VERIFICATION
+==================================================
+❌ Redis Error: Error 22 connecting to localhost:6379. The remote computer refused the network connection.
+
+==================================================
+VERIFICATION COMPLETE
+==================================================
