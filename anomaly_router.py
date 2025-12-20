@@ -152,7 +152,7 @@ def get_categories():
     }
 
 @router.get("/anomalies", response_model=List[AnomalyItem])
-def anomalies(
+async def anomalies(
     category: str = Query("genel", description="Tüketim kategorisi"),
     city: Optional[str] = Query(None, description="Şehir adı (BÜYÜK HARF ve İngilizce karakterlerle)"),
     start: Optional[str] = Query(None, description="YYYY-MM-DD"),
@@ -164,6 +164,18 @@ def anomalies(
         category = category.strip().lower()
         if city:
             city = city.strip().upper()
+        
+        # Cache key oluştur
+        cache_key = f"anomaly:{category}:{city or 'none'}:{start or 'none'}:{end or 'none'}:{tolerance_pct}"
+        
+        # Cache kontrolü - EN BAŞINDA
+        cached_result = await get_cache(cache_key)
+        if cached_result is not None:
+            print("Redis cache HIT")
+            # Cache'den gelen veriyi AnomalyItem listesine çevir
+            if isinstance(cached_result, list):
+                return [AnomalyItem(**item) if isinstance(item, dict) else item for item in cached_result]
+            return cached_result
         
         if category not in CONSUMPTION_CATEGORIES:
             available_cats = list(CONSUMPTION_CATEGORIES.keys())
@@ -280,6 +292,11 @@ def anomalies(
             out = out[out["donem"] <= pd.to_datetime(end).strftime("%Y-%m-%d")]
 
         result = [AnomalyItem(**rec) for rec in out.to_dict(orient="records")]
+        
+        # Cache'e kaydet - Hesaplama tamamlandıktan sonra, return edilmeden önce
+        result_dict = [item.dict() for item in result]
+        await set_cache(cache_key, result_dict, city=city)
+        print("Redis cache SET")
         
         if debug:
             from fastapi.responses import JSONResponse

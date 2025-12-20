@@ -97,7 +97,7 @@ async def get_cache(key: str) -> Optional[Any]:
         value = await redis_client.get(key)
         if value:
             cache_stats["hits"] += 1
-            logger.debug(f"Cache hit: {key} ✅")
+            logger.info(f"Cache hit: {key} ✅")
             # JSON parse dene
             try:
                 return json.loads(value)
@@ -105,7 +105,7 @@ async def get_cache(key: str) -> Optional[Any]:
                 return value
         else:
             cache_stats["misses"] += 1
-            logger.debug(f"Cache miss: {key} 🚫")
+            logger.info(f"Cache miss: {key} 🚫")
         return None
     except Exception as e:
         cache_stats["errors"] += 1
@@ -128,7 +128,7 @@ async def delete_cache_pattern(pattern: str) -> int:
         keys = await redis_client.keys(pattern)
         if keys:
             deleted = await redis_client.delete(*keys)
-            logger.info(f"Cache pattern silindi: {pattern} - {deleted} key silindi")
+            logger.debug(f"Cache pattern silindi: {pattern} - {deleted} key silindi")
             return deleted
         return 0
     except Exception as e:
@@ -154,7 +154,7 @@ async def reset_cache_stats():
     """Cache istatistiklerini sıfırla"""
     global cache_stats
     cache_stats = {"hits": 0, "misses": 0, "sets": 0, "errors": 0}
-    logger.info("Cache istatistikleri sıfırlandı")
+    logger.debug("Cache istatistikleri sıfırlandı")
 
 # Cache invalidation stratejileri
 async def invalidate_anomaly_cache(category: Optional[str] = None, city: Optional[str] = None):
