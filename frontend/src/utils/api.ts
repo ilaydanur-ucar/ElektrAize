@@ -97,3 +97,40 @@ export async function checkHealth(): Promise<{ status: string; service: string; 
         throw error
     }
 }
+export interface RankingResponse {
+    city: string
+    rank: number
+    total_cities: number
+    anomaly_count: number
+    message?: string
+}
+
+export async function fetchCityRanking(
+    city: string,
+    category: string = 'genel',
+    startDate?: string,
+    endDate?: string,
+    tolerancePct: number = 0.10
+): Promise<RankingResponse> {
+    try {
+        const params = new URLSearchParams({
+            category,
+            city: city.toUpperCase(),
+            tolerance_pct: tolerancePct.toString()
+        })
+
+        if (startDate) params.append('start', startDate)
+        if (endDate) params.append('end', endDate)
+
+        const response = await fetch(`${API_BASE_URL}/ranking?${params}`)
+
+        if (!response.ok) {
+            throw new Error(`Ranking API Error: ${response.status}`)
+        }
+
+        return await response.json()
+    } catch (error) {
+        console.error('Sıralama verisi çekilirken hata:', error)
+        throw error
+    }
+}

@@ -9,11 +9,11 @@ declare global {
 
 interface TurkeyMapProps {
   onCitySelect?: (city: { id: string, name: string }) => void
+  dark: boolean
 }
 
-export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
+export default function TurkeyMap({ onCitySelect, dark }: TurkeyMapProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null)
-  const mapInitialized = useRef(false)
   const [selectedCity, setSelectedCity] = useState<{ id: string, name: string } | null>(null)
 
   // onCitySelect referansını ref olarak tut (dependency loop'u önlemek için)
@@ -24,8 +24,6 @@ export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
   }, [onCitySelect])
 
   useEffect(() => {
-    if (mapInitialized.current) return
-
     // Global callback fonksiyonu - harita bu fonksiyonu çağıracak
     window.handleCityClick = (stateId: string, stateName: string) => {
       console.log('🗺️ Şehir tıklandı!')
@@ -73,9 +71,18 @@ export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
 
         // Script'leri yükle
         await loadScript('/html5countrymapv4.5/mapdata.js')
+
+        // Rengi güncelle (Script'ten gelen global değişkeni editle)
+        if ((window as any).simplemaps_countrymap_mapdata) {
+          (window as any).simplemaps_countrymap_mapdata.main_settings.state_color = dark ? "#3a49b8" : "#f4f5fc";
+          // Kenar rengini de ayarlayalım ki light modda harita sınırları belli olsun
+          (window as any).simplemaps_countrymap_mapdata.main_settings.border_color = dark ? "transparent" : "#7aa4f5";
+          (window as any).simplemaps_countrymap_mapdata.main_settings.border_size = dark ? 0 : 2;
+          (window as any).simplemaps_countrymap_mapdata.main_settings.state_hover_color = dark ? "#ffe646" : "#fef08a";
+        }
+
         await loadScript('/html5countrymapv4.5/countrymap.js')
 
-        mapInitialized.current = true
         console.log('Harita başarıyla yüklendi!')
         console.log('✅ Şehirlere tıklayabilirsiniz!')
 
@@ -84,19 +91,18 @@ export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
       }
     }
 
-    // Küçük bir gecikme ile başlat
+    // Haritayı her tema değişiminde yeniden başlat
     const timer = setTimeout(() => {
       initMap()
     }, 100)
 
     return () => {
       clearTimeout(timer)
-      // Cleanup - global fonksiyonu temizle
       if (window.handleCityClick) {
         delete window.handleCityClick
       }
     }
-  }, [])
+  }, [dark]) // dark değişince çalışır
 
   // Seçilen şehir değiştiğinde
   useEffect(() => {
@@ -109,7 +115,11 @@ export default function TurkeyMap({ onCitySelect }: TurkeyMapProps) {
     <div className="w-full relative">
       {/* Seçilen şehir bilgisi - Sabit pozisyon, haritanın üstünde */}
       {selectedCity && (
-        <div className="fixed top-24 right-8 z-50 p-4 bg-purple-500/90 backdrop-blur-md border border-purple-400/50 rounded-lg shadow-xl">
+        <div
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed top-24 right-8 z-50 p-4 bg-purple-500/90 backdrop-blur-md border border-purple-400/50 rounded-lg shadow-xl cursor-pointer hover:bg-purple-500 transition-colors"
+          title="Haritaya dönmek için tıklayın"
+        >
           <p className="text-lg">
             <span className="font-semibold">Seçilen Şehir:</span>{' '}
             <span className="text-white">{selectedCity.name}</span>

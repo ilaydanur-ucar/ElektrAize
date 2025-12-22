@@ -3,3 +3,7 @@ __pycache__/
 .env
 firebase_config.json
 
+
+venv/
+node_modules/
+.DS_Store

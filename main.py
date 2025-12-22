@@ -23,6 +23,7 @@ from firebase_init import db
 
 # Anomaly router - en son (çünkü diğer modüllere bağımlı)
 from anomaly_router import router as anomalies_router, load_all_models
+from email_routes import router as email_router
 
 
 @asynccontextmanager
@@ -134,6 +135,9 @@ app.openapi = custom_openapi
 
 # Anomali router'ını ekle
 app.include_router(anomalies_router)
+
+# Email router'ını ekle
+app.include_router(email_router)
 
 # ===================== ROUTES =====================
 

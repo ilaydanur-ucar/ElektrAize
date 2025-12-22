@@ -22,3 +22,19 @@ def send_verification(id_token: str):
     # Başarı
     data = r.json()  # {"email": "..."} döner
     return {"status": "ok", "email": data.get("email")}
+
+
+@router.post("/send-contact-email")
+def send_contact(subject: str, from_email: str, message: str):
+    """
+    Contact form endpoint - sends email via Resend
+    """
+    from email_service import send_contact_email
+    
+    try:
+        result = send_contact_email(subject, from_email, message)
+        return {"status": "ok", "message": "Email sent successfully"}
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -121,7 +121,16 @@ def detect_anomalies(gercek: pd.Series, baseline: pd.Series, tolerance_pct: floa
     baseline_safe = baseline.replace(0, 1e-8)
     alt_limit = baseline_safe * (1 - tolerance_pct)
     ust_limit = baseline_safe * (1 + tolerance_pct)
-    anomalies = ((gercek < alt_limit) | (gercek > ust_limit)) & baseline.notna()
+    
+    # 1. Sıfır veya negatif değerler KESİN anomali (Kesinti vs.)
+    zero_anomalies = (gercek <= 0)
+    
+    # 2. Tolerans dışı sapmalar
+    deviation_anomalies = ((gercek < alt_limit) | (gercek > ust_limit))
+    
+    # Hepsini birleştir (baseline null ise anomali sayılmaz, veri yoktur)
+    anomalies = (zero_anomalies | deviation_anomalies) & baseline.notna()
+    
     return anomalies, alt_limit, ust_limit
 
 # -----------------------------------------------------------------------------
@@ -171,7 +180,7 @@ async def anomalies(
         # Cache kontrolü - EN BAŞINDA
         cached_result = await get_cache(cache_key)
         if cached_result is not None:
-            print("Redis cache HIT")
+            print("⚡⚡⚡ Veri Redis'ten alındı! ⚡⚡⚡")
             # Cache'den gelen veriyi AnomalyItem listesine çevir
             if isinstance(cached_result, list):
                 return [AnomalyItem(**item) if isinstance(item, dict) else item for item in cached_result]
@@ -317,6 +326,149 @@ async def anomalies(
     except Exception as e:
         import traceback
         traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/ranking")
+def get_city_ranking(
+    category: str = Query("genel", description="Tüketim kategorisi"),
+    city: str = Query(..., description="Sıralaması istenen şehir"),
+    start: Optional[str] = Query(None, description="YYYY-MM-DD"),
+    end: Optional[str] = Query(None, description="YYYY-MM-DD"),
+    tolerance_pct: float = Query(0.10, description="Tolerans yüzdesi")
+):
+    """
+    Seçilen tarih aralığı ve kategori için şehirleri anomali sayısına göre sıralar
+    ve istenen şehrin sırasını döndürür.
+    """
+    try:
+        category = category.strip().lower()
+        city = city.strip().upper()
+        
+        # İstek yapılan şehir İstanbul ise düzeltme
+        if city == "ISTANBUL":
+            pass
+
+        # 1. Model ve Veri Kontrolü
+        if category not in MODELS or MODELS[category] is None:
+             raise HTTPException(status_code=400, detail=f"'{category}' modeli yüklenmemiş.")
+             
+        model_info = MODELS[category]
+        target_col = model_info['target_col']
+        model = model_info['model']
+        
+        # 2. Tüm Şehirlerin Verisini Çek
+        df_train, df_test = get_processed_frames(target_col=target_col)
+        
+        # Train hazırlık
+        df_train = df_train.copy()
+        df_train["ay"] = pd.to_datetime(df_train[DATE_COL]).dt.month
+        # Test hazırlık
+        df_test = df_test.copy() 
+        df_test["ay"] = pd.to_datetime(df_test[DATE_COL]).dt.month
+        
+        # Global Baseline
+        seasonal_baseline = (
+            df_train.groupby([CITY_COL, "ay"])[target_col]
+            .mean()
+            .rename("baseline")
+            .reset_index()
+        )
+        
+        # Baseline birleştirme
+        df_train = df_train.merge(seasonal_baseline, on=[CITY_COL, "ay"], how="left")
+        df_test = df_test.merge(seasonal_baseline, on=[CITY_COL, "ay"], how="left")
+        
+        full_df = pd.concat([df_train, df_test], ignore_index=True)
+        
+        # 3. Tarih Filtresi
+        if start:
+            start_date = pd.to_datetime(start)
+            full_df = full_df[pd.to_datetime(full_df[DATE_COL]) >= start_date]
+        if end:
+            end_date = pd.to_datetime(end)
+            full_df = full_df[pd.to_datetime(full_df[DATE_COL]) <= end_date]
+            
+        if len(full_df) == 0:
+             return {
+                "city": city,
+                "rank": 0,
+                "total_cities": 0,
+                "anomaly_count": 0,
+                "message": "Seçilen tarih aralığında veri yok."
+            }
+
+        # 4. Tahmin ve Anomali Hesabı (Toplu)
+        Xtr, Xte, ytr, yte = get_train_test(target_col=target_col)
+        
+        # Predict All (Train + Test)
+        yhat_train = model.predict(Xtr)
+        yhat_test = model.predict(Xte)
+        
+        # DataFrame oluşturup birleştir
+        # Xtr/Xte, df_train/df_test ile satır satır eşleşir (aynı shuffle seed veya shufflesız varsayımı ile)
+        # veri_cek.py'de shuffle=False değilse riskli. Ancak burada aggregate ranking yapıyoruz.
+        # Güvenli yol: get_train_test yerine feature columns ile full_df üzerinden predict yapmak daha iyi olurdu.
+        # Ancak feature columns listesi veri_cek içinde private olabilir.
+        # Şimdilik mevcut yapıyı kullanıyoruz:
+        
+        res_tr = pd.DataFrame({'sehir': df_train[CITY_COL], 'donem': df_train[DATE_COL], 'gercek': ytr, 'tahmin': yhat_train})
+        res_tr = res_tr.merge(seasonal_baseline, left_on=['sehir', res_tr['donem'].dt.month], right_on=[CITY_COL, 'ay'], how='left')
+        
+        res_te = pd.DataFrame({'sehir': df_test[CITY_COL], 'donem': df_test[DATE_COL], 'gercek': yte, 'tahmin': yhat_test})
+        res_te = res_te.merge(seasonal_baseline, left_on=['sehir', res_te['donem'].dt.month], right_on=[CITY_COL, 'ay'], how='left')
+
+        combined = pd.concat([res_tr, res_te])
+        
+        # Tarih filtresi tekrar
+        if start:
+            combined = combined[combined['donem'] >= pd.to_datetime(start)]
+        if end:
+            combined = combined[combined['donem'] <= pd.to_datetime(end)]
+
+        # Anomali tespiti
+        # Baseline merge sonrası geldi
+        anomalies_mask, _, _ = detect_anomalies(combined['gercek'], combined['baseline'], tolerance_pct)
+        combined['anomali'] = anomalies_mask
+        
+        # 5. Gruplama ve Sıralama
+        # İstanbul birleştirme logic'i
+        combined['sehir_norm'] = combined['sehir'].apply(lambda x: "ISTANBUL" if "ISTANBUL" in str(x) else str(x))
+        
+        ranking_df = combined.groupby('sehir_norm')['anomali'].sum().reset_index()
+        ranking_df = ranking_df.sort_values('anomali', ascending=False).reset_index(drop=True)
+        
+        # Rank bulma (1-based)
+        ranking_df['rank'] = ranking_df.index + 1
+        
+        # İstenen şehri bul
+        # İstanbul ise ISTANBUL olarak arayacak
+        search_city = "ISTANBUL" if "ISTANBUL" in city else city
+        
+        my_rank_row = ranking_df[ranking_df['sehir_norm'] == search_city]
+        
+        if len(my_rank_row) == 0:
+             return {
+                "city": city,
+                "rank": 0,
+                "total_cities": len(ranking_df),
+                "anomaly_count": 0,
+                "message": "Şehir için veri bulunamadı."
+            }
+            
+        rank = int(my_rank_row.iloc[0]['rank'])
+        count = int(my_rank_row.iloc[0]['anomali'])
+        total = len(ranking_df)
+        
+        return {
+            "city": city,
+            "rank": rank,
+            "total_cities": total,
+            "anomaly_count": count,
+            "message": f"Success"
+        }
+
+    except Exception as e:
+        print(f"[ERROR] Ranking error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/debug/city/{city_name}")

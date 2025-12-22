@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -10,11 +12,32 @@ html, body, #root {
   min-height: 100vh;
 }
 
+
+/* Font Settings */
+/* Light Mode - Default */
+html {
+  font-family: 'Comfortaa', sans-serif;
+}
+
+/* Dark Mode */
+html.dark {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Apply to all elements */
+*,
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
 /* Leaflet il sınırları için yumuşak geçiş efekti */
 .leaflet-province {
   transition: fill 200ms ease, stroke 200ms ease, fill-opacity 200ms ease, stroke-width 200ms ease;
   cursor: pointer;
 }
+
 /* Gündüz modunda harita arkaplanını mavi yap */
 .light-map {
   background-color: #dbeafe !important;
@@ -70,3 +93,26 @@ html, body, #root {
   pointer-events: none !important;
 }
 
+
+/* SimpleMaps Tooltip Override for Light Mode */
+body.light-mode .tt_sm {
+  background-color: #e0e7ff !important;
+  /* Light Blue */
+  color: #000035 !important;
+  border: 1px solid #c7d2fe !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes float-clouds {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(120vw);
+  }
+}
+
+.animate-float-clouds {
+  animation-name: float-clouds;
+}

@@ -403,10 +403,33 @@ class SupabaseManager:
 
     
     def fetch_table(self, table_name: str) -> pd.DataFrame:
-        """Tek bir tablo çek"""
+        """Tek bir tablo çek (Pagination ile tüm veriyi al)"""
         try:
-            res = self.client.table(table_name).select("*").execute()
-            return pd.DataFrame(res.data) if res.data else pd.DataFrame()
+            all_data = []
+            offset = 0
+            limit = 1000 # Supabase max limit per request
+            
+            while True:
+                # Range queries are inclusive: [start, end]
+                res = self.client.table(table_name)\
+                    .select("*")\
+                    .range(offset, offset + limit - 1)\
+                    .execute()
+                
+                rows = res.data
+                if not rows:
+                    break
+                    
+                all_data.extend(rows)
+                
+                # If we got fewer rows than limit, we've reached the end
+                if len(rows) < limit:
+                    break
+                    
+                offset += limit
+                
+            return pd.DataFrame(all_data) if all_data else pd.DataFrame()
+            
         except Exception as e:
             logger.error(f"{table_name} çekilemedi: {e}")
             return pd.DataFrame()
